@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ahmed Mohamed | Management Information System (MIS) Student</title>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Fira+Code:wght@400;600&family=Source+Code+Pro:wght@400;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --bg-primary: #0a0e0a;
+            --bg-secondary: #1a1f1a;
+            --text-primary: #00ff41;
+            --text-secondary: #00cc33;
+            --text-dim: #008f11;
+            --accent: #39ff14;
+            --error: #ff0040;
+            --warning: #ffaa00;
+            --info: #00ffff;
+            --border: #00ff41;
+        }
+        
+        body {
+            font-family: 'JetBrains Mono', 'Fira Code', 'Source Code Pro', monospace;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* Scanline effect */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                transparent 50%,
+                rgba(0, 255, 65, 0.03) 50%
+            );
+            background-size: 100% 4px;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        /* Glow effect */
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(
+                ellipse at center,
+                transparent 0%,
+                rgba(0, 0, 0, 0.4) 100%
+            );
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* Terminal Header */
+        .terminal-header {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px 8px 0 0;
+            padding: 0.5rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .terminal-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .terminal-button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        
+        .terminal-button.red { background: #ff5f56; }
+        .terminal-button.yellow { background: #ffbd2e; }
+        .terminal-button.green { background: #27c93f; }
+        
+        .terminal-title {
+            flex: 1;
+            text-align: center;
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+        
+        /* Main Terminal */
+        .terminal-body {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+            padding: 2rem;
+            min-height: 500px;
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.1);
+        }
+        
+        /* ASCII Art Header */
+        .ascii-art {
+            color: var(--accent);
+            font-size: 0.7rem;
+            line-height: 1.2;
+            margin-bottom: 2rem;
+            white-space: pre;
+            overflow-x: auto;
+        }
+        
+        /* Typing Animation */
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+        
+        .typing-text {
+            overflow: hidden;
+            white-space: nowrap;
+            /* border-right: 0.15em solid var(--text-primary); */ /* The cursor */
+            /* animation: 
+                typing 3.5s steps(40, end),
+                blink 0.75s step-end infinite; */
+        }
+        
+        /* Profile Section */
+        .profile {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            border-bottom: 1px dashed var(--border);
+            padding-bottom: 2rem;
+        }
+        
+        .profile-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--accent);
+            box-shadow: 0 0 10px var(--accent);
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        .profile-photo:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px var(--accent);
+        }
+        
+        .profile-info h1 {
+            font-size: 2.5rem;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 5px rgba(0, 255, 65, 0.5);
+        }
+        
+        .profile-info h2 {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+        
+        .social-links a {
+            color: var(--info);
+            text-decoration: none;
+            margin-right: 1rem;
+            font-size: 1.5rem;
+            transition: color 0.3s ease-in-out;
+        }
+        
+        .social-links a:hover {
+            color: var(--accent);
+            text-shadow: 0 0 5px var(--accent);
+        }
+        
+        /* Section Styling */
+        .section {
+            margin-bottom: 3rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px dashed var(--border);
+        }
+        
+        .section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        
+        .section h3 {
+            font-size: 1.8rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+            border-left: 5px solid var(--accent);
+            padding-left: 1rem;
+            text-transform: uppercase;
+        }
+        
+        .section p, .section ul {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+        
+        .section ul {
+            list-style: none;
+            padding-left: 1rem;
+        }
+        
+        .section ul li::before {
+            content: ">";
+            color: var(--text-secondary);
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+        
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .skill-item {
+            background: var(--bg-primary);
+            padding: 1rem;
+            border: 1px solid var(--border);
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 255, 65, 0.05);
+        }
+        
+        .skill-item h4 {
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .skill-bar {
+            background: var(--bg-primary);
+            border: 1px solid var(--text-dim);
+            height: 10px;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .skill-progress {
+            height: 100%;
+            background: var(--accent);
+            transition: width 1s ease-out;
+        }
+        
+        /* Education/Experience Timeline */
+        .timeline {
+            position: relative;
+            padding: 1rem 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 15px;
+            width: 2px;
+            height: 100%;
+            background: var(--text-dim);
+        }
+        
+        .timeline-item {
+            margin-left: 40px;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            top: 1rem;
+            left: -25px;
+            width: 10px;
+            height: 10px;
+            background: var(--accent);
+            border-radius: 50%;
+            border: 3px solid var(--bg-secondary);
+            box-shadow: 0 0 5px var(--accent);
+        }
+        
+        .timeline-item h4 {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 0.2rem;
+        }
+        
+        .timeline-item p {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding-top: 2rem;
+            color: var(--text-dim);
+            font-size: 0.8rem;
+        }
+        
+        /* Media Queries for Responsiveness */
+        @media (max-width: 768px) {
+            .profile {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .profile-info h1 {
+                font-size: 2rem;
+            }
+            
+            .profile-info h2 {
+                font-size: 1rem;
+            }
+            
+            .section h3 {
+                font-size: 1.5rem;
+            }
+            
+            .timeline::before {
+                left: 10px;
+            }
+            
+            .timeline-item {
+                margin-left: 30px;
+            }
+            
+            .timeline-item::before {
+                left: -20px;
+            }
+        }
+    </style>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+</head>
+<body>
+    <div class="container">
+        <div class="terminal-header">
+            <div class="terminal-buttons">
+                <div class="terminal-button red"></div>
+                <div class="terminal-button yellow"></div>
+                <div class="terminal-button green"></div>
+            </div>
+            <div class="terminal-title">~/ahmed_mohamed.html</div>
+        </div>
+        
+        <div class="terminal-body">
+            
+
+            
+            <!-- Profile Section -->
+            <div class="profile">
+                <!-- Using a placeholder image - User should replace this with their photo -->
+                <img src="assets/profile.jpg" alt="Ahmed Mohamed Profile Photo" class="profile-photo">
+                <div class="profile-info">
+                    <h1 class="typing-text" data-text="Ahmed Mohamed Ibrahim Mohamed">Ahmed Mohamed Ibrahim Mohamed</h1>
+                    <h2>Management Information System (MIS) Student</h2>
+                    <div class="social-links">
+                        <a href="mailto:ahmedmim2016@hotmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a>
+                        <!-- Placeholder for other social links - User can add their own -->
+                        <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" title="GitHub"><i class="fab fa-github"></i></a>
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <!-- About Section -->
+            <div class="section" id="about">
+                <h3>About Me</h3>
+                <p>
+                    Hey, I'm **Ahmed Mohamed**, 23 years old, and originally from Sudan - Khartoum. After the war, I moved to Turkey and started my university education here. I am currently a **3rd Year MIS (Management Information System) student** at Halic University in Istanbul, Turkey.
+                </p>
+                <p>
+                    I always wanted to study Dentistry, but due to the war in Sudan, I wasn't able to. When I started MIS, the first year was the hardest. However, starting from this third year, I've managed to cope, develop some knowledge, and better understand the department.
+                </p>
+                <p>
+                    Nevertheless, while this may not have been the path I initially envisioned, I made a deal with myself that nothing in this life will ever be able to drag me down. I managed to succeed, and although it's hard, nothing worthwhile is easy. You either find a way out or get stuck and live in regret. For me, I always find a way out to keep pushing.
+                </p>
+                <p>
+                    Lastly, this is my story, and I hope I keep pushing until I reach a place where I am happy with myself. My advice for anyone is to **never give up no matter what happens in life. "Be Positive, Be Strong."**
+                </p>
+            </div>
+            
+            <!-- Education Section -->
+            <div class="section" id="education">
+                <h3>Education</h3>
+                <div class="timeline">
+                    
+                    <div class="timeline-item">
+                        <h4>Halic University</h4>
+                        <p>MIS (Management Information System) | Graduation: 2026</p>
+                        <p>Focusing on Software Development.</p>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <!-- Skills Section - Placeholder, user did not provide specific skills -->
+            <div class="section" id="skills">
+                <h3>Skills & Interests</h3>
+                <div class="skills-grid">
+                    
+                    <div class="skill-item">
+                        <h4>Software Development</h4>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 70%;"></div></div>
+                    </div>
+                    
+                    <div class="skill-item">
+                        <h4>Management Information Systems (MIS)</h4>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 80%;"></div></div>
+                    </div>
+                    
+                    <div class="skill-item">
+                        <h4>Problem-Solving & Resilience</h4>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 95%;"></div></div>
+                    </div>
+                    
+                    <!-- Feel free to update these skills and percentages -->
+                    
+                </div>
+            </div>
+            
+            <!-- Contact Section -->
+            <div class="section" id="contact">
+                <h3>Contact</h3>
+                <p>$ echo $CONTACT_INFO</p>
+                <ul>
+                    <li>ahmedmim2016@hotmail.com</li>
+                    <li>Istanbul - Turkey</li>
+                    <li>[LinkedIn Placeholder]</li>
+                    <li>[GitHub Placeholder]</li>
+                </ul>
+            </div>
+            
+            <div class="footer">
+                <p>&#169; 2025 Ahmed Mohamed. All Rights Reserved.</p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Smooth scrolling for navigation (if a nav was present)
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Animate skill bars on scroll
+        const observerOptions = {
+            threshold: 0.5,
+            rootMargin: '0px'
+        };
+        
+        const skillObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const skillBars = entry.target.querySelectorAll('.skill-progress');
+                    skillBars.forEach(bar => {
+                        const width = bar.style.width;
+                        bar.style.width = '0';
+                        setTimeout(() => {
+                            bar.style.width = width;
+                        }, 100);
+                    });
+                }
+            });
+        }, observerOptions);
+        
+        const skillsSection = document.querySelector('#skills');
+        if (skillsSection) {
+            skillObserver.observe(skillsSection);
+        }
+        
+        // Terminal typing effect for dynamic content
+        function typeWriter(element, text, speed = 50) {
+            let i = 0;
+            element.textContent = '';
+            
+            function type() {
+                if (i < text.length) {
+                    element.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            
+            type();
+        }
+        
+        // Initialize typing effect on the title
+        const titleElement = document.querySelector('.typing-text');
+        if (titleElement) {
+            const textToType = titleElement.getAttribute('data-text');
+            typeWriter(titleElement, textToType, 100);
+        }
+        
+        // Add glitch effect on hover for the title
+        const title = document.querySelector('.ascii-art');
+        if (title) {
+            title.addEventListener('mouseenter', () => {
+                title.style.animation = 'glitch 0.3s infinite';
+            });
+            
+            title.addEventListener('mouseleave', () => {
+                title.style.animation = 'none';
+            });
+        }
+        
+        // Add glitch animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes glitch {
+                0% { text-shadow: 0.05em 0 0 #00fffc, -0.05em -0.025em 0 #fc00ff, 0.025em 0.05em 0 #fffc00; }
+                15% { text-shadow: 0.05em 0 0 #00fffc, -0.05em -0.025em 0 #fc00ff, 0.025em 0.05em 0 #fffc00; }
+                16% { text-shadow: -0.05em -0.025em 0 #00fffc, 0.025em 0.025em 0 #fc00ff, -0.05em -0.05em 0 #fffc00; }
+                49% { text-shadow: -0.05em -0.025em 0 #00fffc, 0.025em 0.025em 0 #fc00ff, -0.05em -0.05em 0 #fffc00; }
+                50% { text-shadow: 0.025em 0.05em 0 #00fffc, 0.05em 0 0 #fc00ff, 0 -0.05em 0 #fffc00; }
+                99% { text-shadow: 0.025em 0.05em 0 #00fffc, 0.05em 0 0 #fc00ff, 0 -0.05em 0 #fffc00; }
+                100% { text-shadow: -0.025em 0 0 #00fffc, -0.025em -0.025em 0 #fc00ff, -0.025em -0.05em 0 #fffc00; }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
