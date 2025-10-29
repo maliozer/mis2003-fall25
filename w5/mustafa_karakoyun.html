@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mustafa Karakoyun | MIS Student</title>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Fira+Code:wght@400;600&family=Source+Code+Pro:wght@400;600&display=swap');
+        
+        * {margin:0;padding:0;box-sizing:border-box;}
+        :root {
+            --bg-primary:#0a0e0a;--bg-secondary:#1a1f1a;
+            --text-primary:#00ff41;--text-secondary:#00cc33;
+            --text-dim:#008f11;--accent:#39ff14;
+            --error:#ff0040;--warning:#ffaa00;--info:#00ffff;--border:#00ff41;
+        }
+        body {
+            font-family:'JetBrains Mono','Fira Code','Source Code Pro',monospace;
+            background-color:var(--bg-primary);color:var(--text-primary);
+            min-height:100vh;overflow-x:hidden;position:relative;
+        }
+        body::before {
+            content:"";position:fixed;top:0;left:0;width:100%;height:100%;
+            background:linear-gradient(transparent 50%,rgba(0,255,65,0.03) 50%);
+            background-size:100% 4px;pointer-events:none;z-index:1;
+        }
+        body::after {
+            content:"";position:fixed;top:0;left:0;width:100%;height:100%;
+            background:radial-gradient(ellipse at center,transparent 0%,rgba(0,0,0,0.4) 100%);
+            pointer-events:none;z-index:1;
+        }
+        .container{max-width:1200px;margin:0 auto;padding:2rem;position:relative;z-index:2;}
+        .terminal-header{background:var(--bg-secondary);border:1px solid var(--border);
+            border-radius:8px 8px 0 0;padding:0.5rem 1rem;display:flex;align-items:center;gap:0.5rem;}
+        .terminal-buttons{display:flex;gap:0.5rem;}
+        .terminal-button{width:12px;height:12px;border-radius:50%;}
+        .terminal-button.red{background:#ff5f56;}
+        .terminal-button.yellow{background:#ffbd2e;}
+        .terminal-button.green{background:#27c93f;}
+        .terminal-title{flex:1;text-align:center;color:var(--text-dim);font-size:0.9rem;}
+        .terminal-body{background:var(--bg-secondary);border:1px solid var(--border);border-top:none;
+            border-radius:0 0 8px 8px;padding:2rem;min-height:500px;box-shadow:0 0 20px rgba(0,255,65,0.1);}
+        .ascii-art{color:var(--accent);font-size:0.7rem;line-height:1.2;margin-bottom:2rem;white-space:pre;overflow-x:auto;}
+        @keyframes typing{from{width:0;}to{width:100%;}}
+        @keyframes blink{50%{opacity:0;}}
+        .typing-text{overflow:hidden;white-space:nowrap;border-right:3px solid var(--text-primary);
+            animation:typing 2s steps(40,end),blink 1s step-end infinite;width:fit-content;}
+        .command-line{margin:1rem 0;display:flex;align-items:center;}
+        .prompt{color:var(--text-secondary);margin-right:0.5rem;}
+        .command{color:var(--info);}
+        .output{margin-left:2rem;color:var(--text-primary);margin-top:0.5rem;margin-bottom:1.5rem;}
+        h1{font-size:2rem;color:var(--accent);text-shadow:0 0 10px rgba(57,255,20,0.5);margin-bottom:1rem;}
+        h2{color:var(--text-secondary);font-size:1.5rem;margin:2rem 0 1rem 0;position:relative;padding-bottom:0.5rem;}
+        h2::before{content:"## ";color:var(--text-dim);}
+        h2::after{content:"";position:absolute;bottom:0;left:0;width:100%;height:1px;
+            background:linear-gradient(90deg,var(--border) 0%,transparent 100%);}
+        a{color:var(--info);text-decoration:none;position:relative;transition:all 0.3s ease;}
+        a:hover{color:var(--accent);text-shadow:0 0 5px rgba(0,255,255,0.5);}
+        a::after{content:"";position:absolute;bottom:-2px;left:0;width:0;height:1px;background:var(--accent);transition:width 0.3s ease;}
+        a:hover::after{width:100%;}
+        nav{margin-bottom:3rem;}
+        nav ul{list-style:none;display:flex;gap:2rem;flex-wrap:wrap;}
+        nav li::before{content:"[ ";color:var(--text-dim);}
+        nav li::after{content:" ]";color:var(--text-dim);}
+        .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin:1.5rem 0;}
+        .skill-item{background:var(--bg-primary);border:1px solid var(--text-dim);padding:1rem;transition:all 0.3s ease;}
+        .skill-item:hover{border-color:var(--accent);box-shadow:0 0 10px rgba(57,255,20,0.3);transform:translateY(-2px);}
+        .skill-name{color:var(--text-secondary);margin-bottom:0.5rem;}
+        .skill-bar{width:100%;height:8px;background:var(--bg-secondary);border:1px solid var(--text-dim);overflow:hidden;}
+        .skill-progress{height:100%;background:linear-gradient(90deg,var(--text-dim),var(--accent));
+            transition:width 1s ease;box-shadow:0 0 10px rgba(57,255,20,0.5);}
+        .contact-info{display:flex;flex-wrap:wrap;gap:2rem;margin:2rem 0;}
+        .contact-item{display:flex;align-items:center;gap:0.5rem;}
+        .contact-item::before{content:"$";color:var(--warning);}
+        footer{text-align:center;margin-top:4rem;padding:2rem;border-top:1px solid var(--text-dim);color:var(--text-dim);}
+        .cursor{display:inline-block;width:10px;height:20px;background:var(--text-primary);animation:blink 1s step-end infinite;}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="terminal-header">
+            <div class="terminal-buttons">
+                <div class="terminal-button red"></div>
+                <div class="terminal-button yellow"></div>
+                <div class="terminal-button green"></div>
+            </div>
+            <div class="terminal-title">mustafa@halic-university:~/portfolio</div>
+        </div>
+
+        <div class="terminal-body">
+            <pre class="ascii-art">
+███╗   ███╗██╗   ██╗███████╗████████╗ █████╗ ███████╗ █████╗ 
+████╗ ████║██║   ██║██╔════╝╚══██╔══╝██╔══██╗██╔════╝██╔══██╗
+██╔████╔██║██║   ██║███████╗   ██║   ███████║█████╗  ███████║
+██║╚██╔╝██║██║   ██║╚════██║   ██║   ██╔══██║██╔══╝  ██╔══██║
+██║ ╚═╝ ██║╚██████╔╝███████║   ██║   ██║  ██║██║     ██║  ██║
+╚═╝     ╚═╝ ╚═════╝ ╚══════╝   ╚═╝   ╚═╝  ╚═╝╚═╝     ╚═╝  ╚═╝
+             M U S T A F A   K A R A K O Y U N
+            </pre>
+
+            <div class="command-line">
+                <span class="prompt">$</span>
+                <span class="command typing-text">whoami</span>
+            </div>
+            <div class="output">
+            <img src="IMG-20241118-WA0008.jpg" alt="Mustafa Karakoyun kedisini tutarken" width="400" style="border-radius:10px;margin-bottom:20px;">
+
+                MIS Student | Haliç University | 2nd Year
+            </div>
+
+            <section id="about">
+                <h2>About</h2>
+                <div class="command-line">
+                    <span class="prompt">$</span>
+                    <span class="command">cat about.md</span>
+                </div>
+                <div class="output">
+                    <p>Hello! I'm <b>Mustafa Karakoyun</b>, a Management Information Systems (MIS) student at Haliç University.</p>
+                    <br>
+                    <p>I enjoy learning about web development, data analysis, and artificial intelligence. I’m passionate about understanding how technology shapes decision-making and business efficiency.</p>
+                    <br>
+                    <p>My goal is to develop myself in both the business and software sides of information systems.</p>
+                </div>
+            </section>
+
+            <section id="skills">
+                <h2>Skills</h2>
+                <div class="command-line">
+                    <span class="prompt">$</span>
+                    <span class="command">npm list --depth=0</span>
+                </div>
+                <div class="output">
+                    <div class="skills-grid">
+                        <div class="skill-item">
+                            <div class="skill-name">HTML / CSS</div>
+                            <div class="skill-bar"><div class="skill-progress" style="width: 40%;"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">Python</div>
+                            <div class="skill-bar"><div class="skill-progress" style="width: 65%;"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">Data Analysis</div>
+                            <div class="skill-bar"><div class="skill-progress" style="width: 45%;"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">Git / GitHub</div>
+                            <div class="skill-bar"><div class="skill-progress" style="width: 55%;"></div></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="education">
+                <h2>Education</h2>
+                <div class="command-line">
+                    <span class="prompt">$</span>
+                    <span class="command">tail -n 20 education.log</span>
+                </div>
+                <div class="output">
+                    <p>Atatürk Anadolu Lisesi</p>
+                    <p><b>Haliç University</b> — Management Information Systems (MIS)</p>
+                    <p>2023 – 2028 | 2nd Year Student</p>
+                </div>
+            </section>
+
+            <section id="contact">
+                <h2>Contact</h2>
+                <div class="command-line">
+                    <span class="prompt">$</span>
+                    <span class="command">echo $CONTACT_INFO</span>
+                </div>
+                <div class="output">
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <a href="mailto:mkarakoyun379@gmail.com">mkarakoyun379@gmail.com</a>
+                        </div>
+                        <div class="contact-item">
+                            <a href="https://www.linkedin.com/in/mustafa-karakoyun-b374562b4/" target="_blank">https://www.linkedin.com/in/mustafa-karakoyun-b374562b4/</a>
+                        </div>
+                        <div class="contact-item">
+                            <a href="https://github.com/Mustafakrkyn" target="_blank">https://github.com/Mustafakrkyn</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <footer>
+                <div class="command-line">
+                    <span class="prompt">$</span>
+                    <span class="command">exit</span>
+                </div>
+                <p>© 2025 Mustafa Karakoyun | Built with &lt;3 and curiosity</p>
+                <p>Last login: <span id="current-date"></span></p>
+                <span class="cursor"></span>
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('current-date').textContent = new Date().toLocaleString();
+    </script>
+</body>
+</html>
