@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ceren Kahraman | Management Information Systems Student</title>
+    
+    <style>
+        /* Google Font: Poppins (sade & modern) */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        /* Pastel + canlı renk paleti */
+        :root{
+            --bg-primary: #FFF8E7;      /* krem arka plan */
+            --bg-secondary: #FFFFFF;    /* içerik kutuları */
+            --text-primary: #222222;    /* ana metin (yumuşak siyah) */
+            --text-secondary: #555555;  /* alt metin */
+            --border: #E6E6E6;          /* ince gri sınır */
+
+            /* canlı başlık renkleri */
+            --pink:   #FF69B4;
+            --blue:   #1E90FF;
+            --green:  #32CD32;
+            --red:    #FF4D4D;
+            --purple: #BA55D3;
+            --orange: #FFA500;
+        }
+
+        body{
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        /* Koyu tema efektlerini kaldırdık */
+        body::before, body::after { content: none; }
+
+        .container{
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Üst çubuk (terminal görünümlü başlık) */
+        .terminal-header{
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 10px 10px 0 0;
+            padding: 0.75rem 1rem;
+            display: flex; align-items: center; gap: 0.5rem;
+        }
+
+        .terminal-buttons{ display: flex; gap: 0.5rem; }
+        .terminal-button{ width: 12px; height: 12px; border-radius: 50%; }
+        .terminal-button.red{ background:#ff5f56; }
+        .terminal-button.yellow{ background:#ffbd2e; }
+        .terminal-button.green{ background:#27c93f; }
+
+        .terminal-title{
+            flex: 1; text-align: center; color: var(--text-secondary); font-size: 0.95rem;
+        }
+
+        /* İçerik kutusu */
+        .terminal-body{
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-top: none;
+            border-radius: 0 0 10px 10px;
+            padding: 2rem;
+            min-height: 500px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+        }
+
+        /* ASCII başlık (artık siyah tonlu, büyük ve zarif) */
+        .ascii-art{
+            color: var(--text-primary);
+            font-size: 0.9rem;          /* ASCII satırlarını okunur tutar */
+            line-height: 1.2;
+            margin-bottom: 2rem;
+            white-space: pre;
+            overflow-x: auto;
+        }
+
+        /* Basit yazım animasyonu (istersen kalsın) */
+        @keyframes typing{ from{width:0;} to{width:100%;} }
+        @keyframes blink{ 50%{opacity:0;} }
+        .typing-text{
+            overflow: hidden; white-space: nowrap;
+            border-right: 3px solid var(--text-primary);
+            animation: typing 2s steps(40,end), blink 1s step-end infinite;
+            width: fit-content;
+        }
+
+        /* Komut satırı görünümü */
+        .command-line{ margin: 1rem 0; display: flex; align-items: center; }
+        .prompt{ color: var(--text-secondary); margin-right: 0.5rem; }
+        .command{ color: var(--blue); }
+        .output{ margin-left: 2rem; color: var(--text-primary); margin-top: 0.5rem; margin-bottom: 1.5rem; }
+
+        /* Başlıklar */
+        h1{
+            font-size: 2.2rem;
+            color: var(--pink);          /* ana başlık: pembe */
+            text-shadow: none;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        h2{
+            font-size: 1.6rem;
+            margin: 2rem 0 1rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-primary);  /* temel renk (alt satırda renk dağıtıyoruz) */
+        }
+
+        /* Bölüm başlıkları için canlı renk dağılımı */
+        /* sayfada h2 sırasına göre atama yapılır */
+        h2:nth-of-type(1){ color: var(--blue); }
+        h2:nth-of-type(2){ color: var(--green); }
+        h2:nth-of-type(3){ color: var(--red); }
+        h2:nth-of-type(4){ color: var(--purple); }
+        h2:nth-of-type(5){ color: var(--orange); }
+
+        /* Alt çizgi (soft) */
+        h2::after{
+            content:"";
+            position:absolute; bottom:0; left:0; width:100%; height:1px;
+            background: linear-gradient(90deg, var(--border) 0%, transparent 100%);
+        }
+
+        /* Linkler */
+        a{ color: var(--blue); text-decoration: none; transition: color .2s ease; }
+        a:hover{ color: var(--pink); }
+
+        /* Navigasyon */
+        nav{ margin-bottom: 2rem; }
+        nav ul{ list-style:none; display:flex; gap:2rem; flex-wrap:wrap; }
+        nav li::before{ content:"[ "; color: var(--text-secondary); }
+        nav li::after{ content:" ]"; color: var(--text-secondary); }
+
+        /* Yetenekler (skills) */
+        .skills-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1rem; margin:1.5rem 0; }
+        .skill-item{
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            padding: 1rem;
+            border-radius: 8px;
+            transition: transform .2s ease, box-shadow .2s ease;
+        }
+        .skill-item:hover{ box-shadow:0 6px 14px rgba(0,0,0,0.06); transform: translateY(-2px); }
+        .skill-name{ color: var(--text-secondary); margin-bottom: .5rem; }
+        .skill-bar{
+            width:100%; height:8px; background:#F3F3F3; border:1px solid #E9E9E9; border-radius:6px; overflow:hidden;
+        }
+        .skill-progress{
+            height:100%;
+            background: linear-gradient(90deg, var(--pink), var(--blue));
+            transition: width 1s ease;
+        }
+
+        /* Proje kartları */
+        .projects{ display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:2rem; margin:2rem 0; }
+        .project-card{
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            padding: 1.25rem;
+            border-radius: 10px;
+            transition: transform .2s ease, box-shadow .2s ease;
+            position: relative;
+        }
+        .project-card::before{ content: ">"; position:absolute; top:1rem; left:.5rem; color: var(--pink); opacity:.7; }
+        .project-card:hover{ transform: translateY(-3px); box-shadow:0 8px 18px rgba(0,0,0,0.07); }
+        .project-title{ color: var(--blue); font-size:1.15rem; margin-bottom:.5rem; }
+
+        /* İletişim */
+        .contact-info{ display:flex; flex-wrap:wrap; gap:1.25rem 2rem; margin:2rem 0; }
+        .contact-item{ display:flex; align-items:center; gap:.5rem; }
+        .contact-item::before{ content:"•"; color: var(--orange); font-weight:700; }
+
+        /* Footer */
+        footer{
+            text-align:center;
+            margin-top: 3rem;
+            padding: 2rem 1rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-secondary);
+            background: var(--bg-secondary);
+            border-radius: 10px;
+        }
+
+        /* Mobil uyum */
+        @media (max-width: 768px){
+            .container{ padding: 1rem; }
+            .ascii-art{ font-size: 0.75rem; }
+            h1{ font-size: 1.8rem; }
+            nav ul{ gap: 1rem; }
+        }
+        </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Terminal Window -->
+        <div class="terminal-header">
+            <div class="terminal-buttons">
+                <div class="terminal-button red"></div>
+                <div class="terminal-button yellow"></div>
+                <div class="terminal-button green"></div>
+            </div>
+            <div class="terminal-title">cerenkahraman@halic:~/portfolio</div>
+        </div>
+        
+        <div class="terminal-body">
+            <!-- ASCII Art Banner -->
+            <pre class="ascii-art">
+   █████████  ██████████ ███████████   ██████████ ██████   █████
+  ███▒▒▒▒▒███▒▒███▒▒▒▒▒█▒▒███▒▒▒▒▒███ ▒▒███▒▒▒▒▒█▒▒██████ ▒▒███ 
+ ███     ▒▒▒  ▒███  █ ▒  ▒███    ▒███  ▒███  █ ▒  ▒███▒███ ▒███ 
+▒███          ▒██████    ▒██████████   ▒██████    ▒███▒▒███▒███ 
+▒███          ▒███▒▒█    ▒███▒▒▒▒▒███  ▒███▒▒█    ▒███ ▒▒██████ 
+▒▒███     ███ ▒███ ▒   █ ▒███    ▒███  ▒███ ▒   █ ▒███  ▒▒█████ 
+ ▒▒█████████  ██████████ █████   █████ ██████████ █████  ▒▒█████
+  ▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒▒▒▒▒ ▒▒▒▒▒   ▒▒▒▒▒ ▒▒▒▒▒▒▒▒▒▒ ▒▒▒▒▒    ▒▒▒▒▒ 
+            </pre>
+            
+            <!-- Welcome Message -->
+            <div class="command-line">
+                <span class="prompt">$</span>
+                <span class="command typing-text">whoami</span>
+            </div>
+            <div class="output">
+                <div style="text-align: center; margin-bottom: 1.5rem;">
+                <img src="ceren_photo.jpg" 
+                    alt="Ceren Kahraman" 
+                    style="width: 190px; height: 190px; border-radius: 50%; object-fit: cover;
+                            border: 3px solid #FFB6C1; box-shadow: 0 0 12px rgba(0,0,0,0.1);">
+            </div>
+                2nd-year Management Information Systems Student at Haliç University
+            </div>
+            
+            <!-- Navigation -->
+            <nav>
+                <div class="command-line">
+                    <span class="prompt">$</span>
+                    <span class="command">ls ./sections/</span>
+                </div>
+                <ul class="output">
+                    <li><a href="#about">about.md</a></li>
+                    <li><a href="#skills">skills.json</a></li>
+                    <li><a href="#publications">publications/</a></li>
+                    <li><a href="#education">education.log</a></li>
+                    <li><a href="#certifications">certs.txt</a></li>
+                    <li><a href="#contact">contact.txt</a></li>
+                </ul>
+            </nav>
+            
+            <!-- About Section -->
+            <section id="about">
+                <h2>About</h2>
+                <div class="command-line">
+                    <span class="prompt">$</span>
+                    <span class="command">cat about.md</span>
+                </div>
+                <div class="output">
+
+                    <p>Hello! I'm <strong>Ceren Kahraman</strong>, a 2nd-year Management Information Systems student at Haliç University.</p>
+                    <br>
+                    <p>I have a strong interest in how technology, design, and business management intersect to create innovative and efficient systems. I enjoy learning about how information technologies support decision-making processes and transform the way organizations operate in the digital era.</p>
+                    <br>
+                    <p>Throughout my studies, I aim to build a solid foundation in both the technical and managerial aspects of information systems, while improving my analytical thinking and problem-solving skills. I value teamwork, adaptability, and the ability to approach challenges with creativity and logic combined.</p>
+                    <br>
+                    <p>Outside of academia, I strive to continuously improve myself, explore new ideas, and dedicate time to music as a form of creativity and balance in my life. I believe that constant learning and curiosity are essential not only for academic success but also for personal growth and fulfillment.</p>
+                </div>
+            </section>
+            
+            <!-- Skills Section -->
+            <section id="skills">
+                <h2>Skills</h2>
+                <div class="command-line">
+                    <span class="prompt">$</span>
+                    <span class="command">show skills --list</span>
+                </div>
+                <div class="output">
+                    <div class="skills-grid">
+                        
+                        <div class="skill-item">
+                            <div class="skill-name">Python Programming</div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 50%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item">
+                            <div class="skill-name">C# Programming</div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 65%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item">
+                            <div class="skill-name">Web Design Fundamentals</div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 40%;"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Publications Section -->
+            <section id="publications">
+                <h2>Projects</h2>
+                <div class="command-line">
+                    <span class="prompt">$</span>
+                    <span class="command">list projects</span>
+                </div>
+                <div class="output">
+                    <div class="projects">
+                        <div class="project-card">
+                            <h3 class="project-title">Personal Website Project</h3>
+                            <p>This project is part of my MIS course assignment. It represents my personal webpage created using HTML and CSS.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Education Section -->
+            <section id="education">
+                <h2>Education</h2>
+                <div class="command-line">
+                    <span class="prompt">$</span>
+                    <span class="command">cat education.log</span>
+                </div>
+                <div class="output">
+                    <div class="projects">
+                        
+                        <div class="project-card">
+                            <h3 class="project-title">Haliç University</h3>
+                            <p style="color: var(--text-secondary);">Management Information Systems | 2023 - Present</p>
+                            <p>Currently studying in the Faculty of Business Administration, focusing on the relationship between technology and management in organizations.</p>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Certifications Section -->
+            <section id="certifications">
+                <h2>Certifications & Awards</h2>
+                <div class="command-line">
+                    <span class="prompt">$</span>
+                    <span class="command">ls -la ./certifications/</span>
+                </div>
+                <div class="output">
+                    <div style="margin-left: 2rem;">
+                        <p style="color: var(--text-secondary);">No certifications or awards have been added yet.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Contact Section -->
+            <section id="contact">
+                <h2>Contact</h2>
+                <div class="command-line">
+                    <span class="prompt">$</span>
+                    <span class="command">echo $CONTACT_INFO</span>
+                </div>
+                <div class="output">
+                    <div class="contact-info">
+                        
+                        <div class="contact-item">
+                            <a href="mailto:cerenkhrmn05@gmail.com">cerenkhrmn05@gmail.com</a>
+                        </div>
+
+                        <div class="contact-item">
+                            <a href="https://github.com/cerenkhrmn" target="_blank">github.com/cerenkhrmn</a>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Footer -->
+            <footer>
+                <div class="command-line">
+                    <span class="prompt">$</span>
+                    <span class="command">exit</span>
+                </div>
+                <p>© 2025 Ceren Kahraman | Personal Web Page Project</p>
+                <p>Last login: <span id="current-date"></span></p>
+                <span class="cursor"></span>
+            </footer>
+    
+    <script>
+        // Set current date
+        document.getElementById('current-date').textContent = new Date().toLocaleString();
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+        
+        // Animate skill bars on scroll
+        const observerOptions = {
+            threshold: 0.5,
+            rootMargin: '0px'
+        };
+        
+        const skillObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const skillBars = entry.target.querySelectorAll('.skill-progress');
+                    skillBars.forEach(bar => {
+                        const width = bar.style.width;
+                        bar.style.width = '0';
+                        setTimeout(() => {
+                            bar.style.width = width;
+                        }, 100);
+                    });
+                }
+            });
+        }, observerOptions);
+        
+        const skillsSection = document.querySelector('#skills');
+        if (skillsSection) {
+            skillObserver.observe(skillsSection);
+        }
+        
+        // Terminal typing effect for dynamic content
+        function typeWriter(element, text, speed = 50) {
+            let i = 0;
+            element.textContent = '';
+            
+            function type() {
+                if (i < text.length) {
+                    element.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            
+            type();
+        }
+        
+        // Add glitch effect on hover for the title
+        const title = document.querySelector('.ascii-art');
+        if (title) {
+            title.addEventListener('mouseenter', () => {
+                title.style.animation = 'glitch 0.3s infinite';
+            });
+            
+            title.addEventListener('mouseleave', () => {
+                title.style.animation = 'none';
+            });
+        }
+        
+        // Add glitch animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes glitch {
+                0% { text-shadow: 0.05em 0 0 #00fffc, -0.05em -0.025em 0 #fc00ff, 0.025em 0.05em 0 #fffc00; }
+                15% { text-shadow: 0.05em 0 0 #00fffc, -0.05em -0.025em 0 #fc00ff, 0.025em 0.05em 0 #fffc00; }
+                16% { text-shadow: -0.05em -0.025em 0 #00fffc, 0.025em 0.025em 0 #fc00ff, -0.05em -0.05em 0 #fffc00; }
+                49% { text-shadow: -0.05em -0.025em 0 #00fffc, 0.025em 0.025em 0 #fc00ff, -0.05em -0.05em 0 #fffc00; }
+                50% { text-shadow: 0.025em 0.05em 0 #00fffc, 0.05em 0 0 #fc00ff, 0 -0.05em 0 #fffc00; }
+                99% { text-shadow: 0.025em 0.05em 0 #00fffc, 0.05em 0 0 #fc00ff, 0 -0.05em 0 #fffc00; }
+                100% { text-shadow: -0.025em 0 0 #00fffc, -0.025em -0.025em 0 #fc00ff, -0.025em -0.05em 0 #fffc00; }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
