@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muhammetnur Asmioglu | Student & Future Developer</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Fira+Code:wght@400&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0a0e0a;
+            --bg-secondary: #1a1f1a;
+            --text-primary: #0ff41a;
+            --text-secondary: #00cc33;
+            --text-dim: #008f11;
+            --accent: #39ff14;
+            --error: #ff0040;
+            --warning: #ffaa00;
+            --info: #00ffff;
+            --border: #00ff41;
+        }
+
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border);
+            box-shadow: 0 0 10px var(--text-dim);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 1px solid var(--text-dim);
+            padding-bottom: 20px;
+        }
+
+        header h1 {
+            color: var(--accent);
+            font-size: 2.5em;
+            margin-bottom: 5px;
+        }
+
+        header p {
+            color: var(--text-secondary);
+            font-size: 1.2em;
+        }
+
+        .profile-section {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            margin-bottom: 40px;
+            padding: 20px;
+            border: 1px dashed var(--text-dim);
+        }
+
+        .profile-photo {
+            flex-shrink: 0;
+        }
+
+        .profile-photo img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 3px solid var(--accent);
+            object-fit: cover;
+        }
+
+        .profile-info h2 {
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+
+        .profile-info p {
+            color: var(--text-secondary);
+            margin-bottom: 5px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section h2 {
+            color: var(--accent);
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        .list-item {
+            margin-bottom: 15px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .list-item::before {
+            content: ">";
+            color: var(--accent);
+            position: absolute;
+            left: 0;
+        }
+
+        .list-item h3 {
+            color: var(--text-primary);
+            font-size: 1.1em;
+            margin-bottom: 3px;
+        }
+
+        .list-item p {
+            color: var(--text-secondary);
+            font-size: 0.9em;
+        }
+
+        .social-links {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--text-dim);
+        }
+
+        .social-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1.1em;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--accent);
+            text-decoration: underline;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+            color: var(--text-dim);
+            font-size: 0.8em;
+        }
+
+        /* Utility classes for text colors */
+        .text-error { color: var(--error); }
+        .text-warning { color: var(--warning); }
+        .text-info { color: var(--info); }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Muhammetnur Asmioglu</h1>
+            <p>Student & Future Developer</p>
+        </header>
+
+        <div class="profile-section">
+            <div class="profile-photo">
+                <!-- Muhammetnur Asmioglu: Replace with your own photo URL or a placeholder -->
+                <img src="https://via.placeholder.com/150/0ff41a/0a0e0a?text=MN" alt="Profile Photo">
+            </div>
+            <div class="profile-info">
+                <h2>A Little About Me</h2>
+                <p>I am a dedicated student passionate about technology and software development. I am currently focusing on web technologies and data analysis, and I am eager to apply my knowledge to real-world projects.</p>
+                <p class="text-info">Current Focus: Front-end Web Development (HTML, CSS, JavaScript) and Python Programming.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Projects & Experience</h2>
+           <div class="list-item">\n                <h3>MIS 2003 - Personal Website Project (Fall 2025)</h3>\n                <p>Designed and implemented a personal web page using HTML and CSS, focusing on clean design and responsive layout.</p>\n            </div>        <div class="list-item">\n                <h3>Volunteer - Tech Mentorship Program (2024)</h3>\n                <p>Assisted high school students with introductory programming concepts and guided them through their first coding projects.</p>\n            </div>
+        </div>
+
+        <div class="section">
+            <h2>Education</h2>
+          <div class="list-item">\n                <h3>B.Sc. in Management Information Systems - Halic University (Expected 2027)</h3>\n                <p>Relevant Coursework: Web Development, Database Management, Business Analytics.</p>\n            </div>           <div class="list-item">\n                <h3>High School Diploma - Online American Schools (2023)</h3>\n                <p>Focused on Science and Mathematics track.</p>\n            </div>       </div>
+
+        <div class="section">
+            <h2>Skills</h2>
+            <div class="list-item">
+                <h3>Programming Languages</h3>
+                <p>Python, HTML, CSS, JavaScript, SQL</p>
+            </div>
+            <div class="list-item">
+                <h3>Technologies & Frameworks</h3>
+                <p>Git, VS Code, Microsoft Office Suite, Basic Linux Commands</p>
+            </div>
+            <div class="list-item">
+                <h3>Core Concepts</h3>
+                <p>Problem Solving, Teamwork, Data Analysis, Software Development Principles</p>
+            </div>
+        </div>
+
+        <div class="social-links">
+            <a href="[YOUR_GITHUB_URL]">GitHub</a>
+            <a href="[YOUR_LINKEDIN_URL]">LinkedIn</a>
+            <a href="mailto:[YOUR_EMAIL_ADDRESS]">Email</a>
+        </div>
+
+        <footer>
+            <p>&#169; 2025 Muhammetnur Asmioglu. Built with 💚 and a terminal aesthetic.</p>
+        </footer>
+    </div>
+</body>
+</html>
