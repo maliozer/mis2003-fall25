@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Görkem Hamer | MIS Student & Web Developer</title>
+  <style>
+    :root {
+      --bg-color: #0d1117;
+      --terminal-color: #161b22;
+      --text-color: #e6edf3;
+      --accent-color: #58a6ff;
+      --text-secondary: #8b949e;
+    }
+
+    body {
+      margin: 0;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: "Fira Code", monospace;
+    }
+
+    .terminal {
+      max-width: 900px;
+      margin: 60px auto;
+      border-radius: 12px;
+      background-color: var(--terminal-color);
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+      overflow: hidden;
+    }
+
+    .terminal-header {
+      background-color: #21262d;
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .dot.red { background-color: #ff5f56; }
+    .dot.yellow { background-color: #ffbd2e; }
+    .dot.green { background-color: #27c93f; }
+
+    .terminal-title {
+      margin-left: auto;
+      margin-right: auto;
+      color: var(--text-secondary);
+      font-size: 14px;
+    }
+
+    .terminal-body {
+      padding: 20px 25px;
+      line-height: 1.6;
+    }
+
+    .command {
+      color: var(--accent-color);
+    }
+
+    .output {
+      margin-left: 25px;
+      color: var(--text-color);
+    }
+
+    .section {
+      margin-top: 25px;
+    }
+
+    .section h3 {
+      color: var(--accent-color);
+      margin-bottom: 8px;
+      font-weight: normal;
+      font-size: 18px;
+    }
+
+    .skill {
+      margin: 6px 0;
+    }
+
+    .skill-name {
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+
+    .skill-bar {
+      height: 8px;
+      background-color: #30363d;
+      border-radius: 4px;
+      margin-top: 4px;
+      overflow: hidden;
+    }
+
+    .skill-progress {
+      height: 100%;
+      background-color: var(--accent-color);
+      border-radius: 4px;
+    }
+
+    a {
+      color: var(--accent-color);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      text-align: center;
+      margin: 40px 0;
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+  </style>
+</head>
+<body>
+  <div class="terminal">
+    <div class="terminal-header">
+      <span class="dot red"></span>
+      <span class="dot yellow"></span>
+      <span class="dot green"></span>
+      <div class="terminal-title">gorkem@web-station:~/portfolio</div>
+    </div>
+
+    <div class="terminal-body">
+      <pre style="color: var(--accent-color); font-weight: bold;">
+     ___           _                                                    
+  / _ \___  _ __| | _____ _ __ ___     /\  /\__ _ _ __ ___   ___ _ __ 
+ / /_\/ _ \| '__| |/ / _ \ '_ ` _ \   / /_/ / _` | '_ ` _ \ / _ \ '__|
+/ /_\\ (_) | |  |      __/ | | | | | / __  / _| | | | | | |  __/ |   
+\____/\___/|_|  |_|\_\___|_| |_| |_| \/ /_/ \__,_|_| |_| |_|\___|_|   
+                                                                       
+         Görkem Hamer
+      </pre>
+
+      <div><span class="command">$ whoami</span></div>
+      <div class="output">MIS Student @ Haliç University | Web Developer | Tech Enthusiast</div>
+
+      <div class="section">
+        <div><span class="command">$ cat about_me.txt</span></div>
+        <div class="output">
+          Hello! I’m <strong>Görkem Hamer</strong>, a Management Information Systems student at Haliç University.
+          I’m passionate about creating modern, responsive web applications and exploring new technologies.
+          I enjoy working with both frontend and backend stacks, including HTML, CSS, JS, PHP, and Python.
+        </div>
+      </div>
+
+      <div class="section">
+        <div><span class="command">$ ls skills/</span></div>
+        <div class="output">
+          <div class="skill">
+            <div class="skill-name">HTML / CSS / JavaScript</div>
+            <div class="skill-bar"><div class="skill-progress" style="width: 80%;"></div></div>
+          </div>
+          <div class="skill">
+            <div class="skill-name">PHP & SQL</div>
+            <div class="skill-bar"><div class="skill-progress" style="width: 85%;"></div></div>
+          </div>
+          <div class="skill">
+            <div class="skill-name">Python</div>
+            <div class="skill-bar"><div class="skill-progress" style="width: 70%;"></div></div>
+          </div>
+          <div class="skill">
+            <div class="skill-name">Git & Version Control</div>
+            <div class="skill-bar"><div class="skill-progress" style="width: 75%;"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div><span class="command">$ cat education.txt</span></div>
+        <div class="output">
+          <strong>Haliç University</strong> — Bachelor’s Degree in Management Information Systems (2022 - Present)
+          <br>Focused on software development, databases, and system analysis.
+        </div>
+      </div>
+
+      <div class="section">
+        <div><span class="command">$ open contact.html</span></div>
+        <div class="output">
+          📧 Email: <a href="mailto:gorkemhamer@hotmail.com">gorkemhamer@hotmail.com</a><br>
+          💼 LinkedIn: <a href="https://linkedin.com/in/gorkemhamer" target="_blank">linkedin.com/in/gorkemhamer</a><br>
+          🧑‍💻 GitHub: <a href="https://github.com/gorkemhamer" target="_blank">github.com/gorkemhamer</a><br>
+          📸 Instagram: <a href="https://instagram.com/gorkem.hmr" target="_blank">@gorkem.hmr</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    © 2025 Görkem Hamer | All Rights Reserved
+  </footer>
+</body>
+</html>
