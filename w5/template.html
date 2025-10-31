@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mahamed Abdiqani Mahamed Samantar | Student</title>
+    <title>Mehmet Ali Özer | AI Engineer & Lecturer</title>
     
     <style>
         @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Fira+Code:wght@400;600&family=Source+Code+Pro:wght@400;600&display=swap');
@@ -17,14 +17,14 @@
         :root {
             --bg-primary: #0a0e0a;
             --bg-secondary: #1a1f1a;
-            --text-primary: #946126;
-            --text-secondary: #29bac4;
-            --text-dim: #b933d1;
-            --accent: #4bff14;
+            --text-primary: #00ff41;
+            --text-secondary: #00cc33;
+            --text-dim: #008f11;
+            --accent: #39ff14;
             --error: #ff0040;
-            --warning: #91b0b9;
-            --info: #55e47e;
-            --border: #3277a8;
+            --warning: #ffaa00;
+            --info: #00ffff;
+            --border: #00ff41;
         }
         
         body {
@@ -125,7 +125,7 @@
         /* ASCII Art Header */
         .ascii-art {
             color: var(--accent);
-            font-size: 1.80rem;
+            font-size: 0.7rem;
             line-height: 1.2;
             margin-bottom: 2rem;
             white-space: pre;
@@ -214,7 +214,7 @@
         
         a:hover {
             color: var(--accent);
-            text-shadow: 0 0 5px rgba(255, 251, 0, 0.5);
+            text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
         }
         
         a::after {
@@ -414,38 +414,42 @@
                 <div class="terminal-button yellow"></div>
                 <div class="terminal-button green"></div>
             </div>
-            <div class="terminal-title">Samantar@MIS.WebPage</div>
+            <div class="terminal-title">maliozer@ai-workstation:~/portfolio</div>
         </div>
         
         <div class="terminal-body">
             <!-- ASCII Art Banner -->
             <pre class="ascii-art">
-█▀▄▀█ ▄▀█ █░█ ▄▀█ █▀▄▀█ █▀▀ █▀▄   █▀ ▄▀█ █▀▄▀█ ▄▀█ █▄░█ ▀█▀ ▄▀█ █▀█
-█░▀░█ █▀█ █▀█ █▀█ █░▀░█ ██▄ █▄▀   ▄█ █▀█ █░▀░█ █▀█ █░▀█ ░█░ █▀█ █▀▄
+███╗   ███╗███████╗██╗  ██╗███╗   ███╗███████╗████████╗     █████╗ ██╗     ██╗
+████╗ ████║██╔════╝██║  ██║████╗ ████║██╔════╝╚══██╔══╝    ██╔══██╗██║     ██║
+██╔████╔██║█████╗  ███████║██╔████╔██║█████╗     ██║       ███████║██║     ██║
+██║╚██╔╝██║██╔══╝  ██╔══██║██║╚██╔╝██║██╔══╝     ██║       ██╔══██║██║     ██║
+██║ ╚═╝ ██║███████╗██║  ██║██║ ╚═╝ ██║███████╗   ██║       ██║  ██║███████╗██║ [replace with your ASCII ART]
+╚═╝     ╚═╝╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝   ╚═╝       ╚═╝  ╚═╝╚══════╝╚═╝
             </pre>
             
             <!-- Welcome Message -->
             <div class="command-line">
                 <span class="prompt">$</span>
-                <span class="command typing-text">WELCOME!!!!!</span>
+                <span class="command typing-text">whoami</span>
             </div>
             <div class="output">
-                Undergraduate Student In MIS | Part Time Footballer @Local Football Grounds | Intern @ Easy Gas Transport Limited | Student @ Haliç University
+                MSc. Data Science | Director & Head of AI @SafeNLP.org | AI Engineer @ Orion Innovation | Lecturer @ Haliç University
             </div>
             
             <!-- Navigation -->
             <nav>
                 <div class="command-line">
                     <span class="prompt">$</span>
-                    <span class="command">sections</span>
+                    <span class="command">ls ./sections/</span>
                 </div>
                 <ul class="output">
-                    <li><a href="#about">about.me</a></li>
-                    <li><a href="#skills">skills</a></li>
-                    <li><a href="#publications">Publications</a></li>
-                    <li><a href="#education">Education</a></li>
-                    <li><a href="#certifications">Certs</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#about">about.md</a></li>
+                    <li><a href="#skills">skills.json</a></li>
+                    <li><a href="#publications">publications/</a></li>
+                    <li><a href="#education">education.log</a></li>
+                    <li><a href="#certifications">certs.txt</a></li>
+                    <li><a href="#contact">contact.txt</a></li>
                 </ul>
             </nav>
             
@@ -454,16 +458,16 @@
                 <h2>About</h2>
                 <div class="command-line">
                     <span class="prompt">$</span>
-                    <span class="command">About.me</span>
+                    <span class="command">cat about.md</span>
                 </div>
                 <div class="output">
-                    <p>Hello, World! I'm Mahamed samantar.I am a final-year student at Halic University pursuing a major in Business Administration and a minor in Management Information. Since starting my degree I have maintained a 3.7 CGPA. </p>
+                    <p>Hello, World! I'm Mehmet Ali Özer, Director of SafeNLP.org, building safe intelligence systems and solutions focused on LLMs. I'm an AI Engineer specializing in Large Language Models and Natural Language Processing with extensive experience in distributed training and model optimization.</p>
                     <br>
-                    <p>Before beginning university I worked for one year at Easy Gas Transport Limited, where I gained practical experience in Logistics and developed strong skills in Logistics and Supply Chain Management.</p>
+                    <p>Currently working at Orion Innovation as an AI Engineer and teaching at Haliç University, where I share my knowledge in Software Development and Artificial Intelligence fundamentals. My expertise spans from developing language-agnostic auto-evaluation packages for LLMs to implementing cutting-edge techniques like DPO for model alignment.</p>
                     <br>
-                    <p>My academic training includes financial statement analysis, managerial accounting, market research, consumer behaviour, supply chain basics, and project management. Through case studies and group projects I developed skills in business planning, SWOT/PESTLE analysis, budgeting, and presenting strategic recommendations.</p>
+                    <p>With a Master's degree in Data Science from Yeditepe University and years of experience at companies like Huawei, I've developed solutions ranging from spell correction systems to distributed parameter-efficient training strategies. I'm passionate about pushing the boundaries of AI technology while ensuring safety and reliability in AI systems at SafeNLP.org !</p>
                     <br>
-                    <p>I enjoy working in teams, solving operational and strategic problems, and using data to support business decisions. In the future I hope to apply these skills in a role in Operations Management and continue growing professionally.</p>
+                    <p>Check out my blog at <a href="https://safenlp.substack.com/" target="_blank">safenlp.substack.com</a> where I write about NLP and AI developments.</p>
                 </div>
             </section>
             
@@ -472,36 +476,36 @@
                 <h2>Skills</h2>
                 <div class="command-line">
                     <span class="prompt">$</span>
-                    <span class="command">Skills List</span>
+                    <span class="command">npm list --depth=0</span>
                 </div>
                 <div class="output">
                     <div class="skills-grid">
                         <div class="skill-item">
-                            <div class="skill-name">Operations Management</div>
+                            <div class="skill-name">Large Language Models (LLMs)</div>
                             <div class="skill-bar">
-                                <div class="skill-progress" style="width: 85%;"></div>
+                                <div class="skill-progress" style="width: 95%;"></div>
                             </div>
                         </div>
                         <div class="skill-item">
-                            <div class="skill-name">Accounting</div>
+                            <div class="skill-name">Python/PyTorch</div>
                             <div class="skill-bar">
-                                <div class="skill-progress" style="width: 100%;"></div>
+                                <div class="skill-progress" style="width: 92%;"></div>
                             </div>
                         </div>
                         <div class="skill-item">
-                            <div class="skill-name">Logistics</div>
+                            <div class="skill-name">Distributed Training</div>
                             <div class="skill-bar">
-                                <div class="skill-progress" style="width: 76%;"></div>
+                                <div class="skill-progress" style="width: 90%;"></div>
                             </div>
                         </div>
                         <div class="skill-item">
-                            <div class="skill-name">Programming</div>
+                            <div class="skill-name">Natural Language Processing</div>
                             <div class="skill-bar">
-                                <div class="skill-progress" style="width: 40%;"></div>
+                                <div class="skill-progress" style="width: 93%;"></div>
                             </div>
                         </div>
                         <div class="skill-item">
-                            <div class="skill-name">Research</div>
+                            <div class="skill-name">add yours</div>
                             <div class="skill-bar">
                                 <div class="skill-progress" style="width: 88%;"></div>
                             </div>
@@ -515,38 +519,38 @@
                 <h2>Publications</h2>
                 <div class="command-line">
                     <span class="prompt">$</span>
-                    <span class="command">Publications</span>
+                    <span class="command">grep -r "*.pdf" ./publications/ | head -3</span>
                 </div>
                 <div class="output">
                     <div class="projects">
                         <div class="project-card">
-                            <h3 class="project-title">Optimizing the Cross-Border Logistics of Liquefied Petroleum Gas (LPG)</h3>
-                            <p>This paper examines the logistical challenges of transporting LPG across multiple countries, focusing on route optimization, cost efficiency, and regulatory compliance.</p>
+                            <h3 class="project-title">Performance Analysis of Text Chunking Methods for LLM-Based Document Summarization</h3>
+                            <p>Published at UBMK Conference. Research on optimizing text chunking strategies for improved LLM-based document summarization performance.</p>
                             <div class="project-tech">
-                                <span class="tech-tag">LPG</span>
-                                <span class="tech-tag">Logistics</span>
-                                <span class="tech-tag">Schedule</span>
-                                <span class="tech-tag">EWURA</span>
+                                <span class="tech-tag">LLMs</span>
+                                <span class="tech-tag">Text Chunking</span>
+                                <span class="tech-tag">Summarization</span>
+                                <span class="tech-tag">UBMK</span>
                             </div>
                         </div>
                         <div class="project-card">
-                            <h3 class="project-title">Digital Solutions for Tracking LPG Deliveries: Improving Safety and Transparency</h3>
-                            <p>Examines the use of GPS and IoT systems in monitoring LPG truck movements to ensure timely and secure deliveries.</p>
+                            <h3 class="project-title">Sentiment Analysis of Twitter Reflections of Distance Education in the COVID-19 Pandemic Process</h3>
+                            <p>Research analyzing public sentiment towards distance education during the COVID-19 pandemic using Twitter data and NLP techniques.</p>
                             <div class="project-tech">
-                                <span class="tech-tag">Logistics Planning</span>
-                                <span class="tech-tag">Data Tracking</span>
-                                <span class="tech-tag">Safety Compliance</span>
-                                <span class="tech-tag">Smart Logistics</span>
+                                <span class="tech-tag">Sentiment Analysis</span>
+                                <span class="tech-tag">Twitter API</span>
+                                <span class="tech-tag">NLP</span>
+                                <span class="tech-tag">COVID-19</span>
                             </div>
                         </div>
                         <div class="project-card">
-                            <h3 class="project-title">Improving Fleet Utilization in LPG Transport Operations</h3>
-                            <p>Focuses on maximizing vehicle usage and reducing downtime through efficient route planning and vehicle scheduling.</p>
+                            <h3 class="project-title">An Investigation of the Usage of Dynamic Time Warping in String Similarity Estimation</h3>
+                            <p>Comprehensive investigation into DTW algorithms and their applications in string similarity estimation and pattern matching.</p>
                             <div class="project-tech">
-                                <span class="tech-tag">Route Mapping</span>
-                                <span class="tech-tag">Transport Systems</span>
-                                <span class="tech-tag">Process Optimization</span>
-                                <span class="tech-tag">Fleet Management</span>
+                                <span class="tech-tag">DTW</span>
+                                <span class="tech-tag">String Matching</span>
+                                <span class="tech-tag">Algorithm Analysis</span>
+                                <span class="tech-tag">Research</span>
                             </div>
                         </div>
                     </div>
@@ -558,19 +562,19 @@
                 <h2>Education</h2>
                 <div class="command-line">
                     <span class="prompt">$</span>
-                    <span class="command">Education Section</span>
+                    <span class="command">tail -n 20 education.log</span>
                 </div>
                 <div class="output">
                     <div class="projects">
                         <div class="project-card">
-                            <h3 class="project-title">Undergraduate in Business Administration</h3>
-                            <p style="color: var(--text-secondary);">Halic University | 2022- 2026</p>
-                            <p>Awesome Student</p>
+                            <h3 class="project-title">Master of Science - Data Science</h3>
+                            <p style="color: var(--text-secondary);">Yeditepe University | 2020 - 2024</p>
+                            <p>Generation of Image Series From a Sequence of Related Short Sentences</p>
                         </div>
                         <div class="project-card">
-                            <h3 class="project-title">High School Diploma </h3>
-                            <p style="color: var(--text-secondary);"> 2013 - 2018</p>
-                            <p>Excellence Through Effort.</p>
+                            <h3 class="project-title">Lorem Ipsum Degree</h3>
+                            <p style="color: var(--text-secondary);">Lorem University | 20XX - 20XX</p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                         </div>
                     </div>
                 </div>
@@ -581,16 +585,16 @@
                 <h2>Certifications & Awards</h2>
                 <div class="command-line">
                     <span class="prompt">$</span>
-                    <span class="command">Certifications</span>
+                    <span class="command">ls -la ./certifications/</span>
                 </div>
                 <div class="output">
                     <div style="margin-left: 2rem;">
-                        <p style="color: var(--info);">→ Graduated with Honors — Maintained excellent academic performance throughout high school with a final GPA of 3.9</p>
-                        <p style="color: var(--info);">→ Community Service Participation — Volunteered 40 hours in school or community outreach programs, promoting social responsibility</p>
-                        <p style="color: var(--info);">→ Research or Publication — Authored a paper on “Optimizing the Logistics of LPG Distribution”.</p>
-                        <p style="color: var(--info);">→ Capstone / Final Year Project — Conducted a major project on “Improving LPG Transport Efficiency Across Borders”, integrating business and logistics concepts.</p>
-                        <p style="color: var(--info);">→ Internship Experience — Completed a professional internship at Easy Gas Transport Limited, gaining practical experience in operations aspect of LPG logistics.</p>
-                        <p style="color: var(--warning);">★ Best Overall Student</p>
+                        <p style="color: var(--info);">→ Building Secure and Trustworthy LLMs Using NVIDIA Guardrails</p>
+                        <p style="color: var(--info);">→ MLx Generative AI Theory, Agents, Products - Oxford</p>
+                        <p style="color: var(--info);">→ European Summer School of Artificial Intelligence, Slovenia,</p>
+                        <p style="color: var(--info);">→ Social COMQUANT'22 - Text Mining and NLP for Computational Social Sciences</p>
+                        <p style="color: var(--info);">→ DeepLearning.ai Study Group 2019-2020</p>
+                        <p style="color: var(--warning);">★ Üstün Başarı Bursu (Outstanding Achievement Scholarship)</p>
                     </div>
                 </div>
             </section>
@@ -600,18 +604,24 @@
                 <h2>Contact</h2>
                 <div class="command-line">
                     <span class="prompt">$</span>
-                    <span class="command">CONTACT INFORMATION</span>
+                    <span class="command">echo $CONTACT_INFO</span>
                 </div>
                 <div class="output">
                     <div class="contact-info">
                         <div class="contact-item">
-                            <a href="mailto:mahamedsamantar45@gmail.com" target="_blank">Email</a>
+                            <a href="mailto:maliozer@safenlp.org">maliozer@safenlp.org</a>
                         </div>
                         <div class="contact-item">
-                            <a href="https://www.linkedin.com/in/mahamed-samantar-aman-star" target="_blank">linkedin</a>
+                            <a href="https://www.linkedin.com/in/maliozer" target="_blank">linkedin.com/in/maliozer</a>
                         </div>
                         <div class="contact-item">
-                            <a href="https://github.com/Samantar45" target="_blank">github.com</a>
+                            <a href="https://github.com/maliozer" target="_blank">github.com/maliozer</a>
+                        </div>
+                        <div class="contact-item">
+                            <a href="https://safenlp.substack.com/" target="_blank">safenlp.substack.com</a>
+                        </div>
+                        <div class="contact-item">
+                            <a href="https://safenlp.org" target="_blank">safenlp.org</a>
                         </div>
                     </div>
                 </div>
@@ -621,9 +631,9 @@
             <footer>
                 <div class="command-line">
                     <span class="prompt">$</span>
-                    <span class="command">The End</span>
+                    <span class="command">exit</span>
                 </div>
-                <p>© 2025 Mahamed Samantar | Built with &lt;Patience And A lot Of Effort </p>
+                <p>© 2024 Mehmet Ali Özer | Built with &lt;3 and lots of coffee</p>
                 <p>Last login: <span id="current-date"></span></p>
                 <span class="cursor"></span>
             </footer>
