@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sulaiman Hamma | AI Enthusiast, Future Politician, and Data Scientist</title>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Source+Code+Pro:wght@400;600&display=swap'); /* Added Source Code Pro for ASCII */
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            /* White and Blue Theme */
+            --bg-primary: #FFFFFF;
+            --bg-secondary: #F4F7F9;
+            --text-primary: #1F2937; /* Dark Text */
+            --text-secondary: #4B5563; /* Gray Text */
+            --accent-blue: #2563EB; /* Primary Blue */
+            --light-blue: #DBEAFE; /* Light Blue BG */
+            --border-color: #E5E7EB;
+            --shadow-color: rgba(37, 99, 235, 0.1); /* Blue Shadow */
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-secondary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: var(--bg-primary);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px var(--shadow-color);
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        /* Profile Header */
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--light-blue);
+        }
+
+        .profile-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--accent-blue);
+            box-shadow: 0 0 15px rgba(37, 99, 235, 0.3);
+        }
+
+        .name-title h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--accent-blue);
+        }
+
+        .name-title h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-top: 5px;
+        }
+
+        /* ASCII Art Styling */
+        .ascii-art-container {
+            font-family: 'Source Code Pro', monospace; /* Use a monospaced font for clean ASCII */
+            background: var(--bg-secondary);
+            color: var(--accent-blue);
+            padding: 20px;
+            margin-top: -20px; /* Pull up closer to the header */
+            border-radius: 8px;
+            border: 1px solid var(--light-blue);
+            overflow-x: auto;
+        }
+
+        .ascii-art-container pre {
+            font-size: 0.8rem;
+            line-height: 1.2;
+            white-space: pre;
+            margin: 0;
+            text-shadow: 0 0 5px rgba(37, 99, 235, 0.2); /* Subtle blue glow */
+        }
+        /* End ASCII Art Styling */
+
+        /* Section Styling */
+        h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+            border-left: 5px solid var(--accent-blue);
+            padding-left: 10px;
+        }
+        
+        p {
+            line-height: 1.6;
+            color: var(--text-secondary);
+        }
+
+        /* Links */
+        a {
+            color: var(--accent-blue);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        a:hover {
+            color: #1D4ED8; /* Darker blue on hover */
+        }
+        
+        /* Skills Grid */
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .skill-item {
+            background-color: var(--light-blue);
+            color: var(--accent-blue);
+            padding: 8px 15px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: transform 0.2s;
+        }
+
+        .skill-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(37, 99, 235, 0.2);
+        }
+
+        /* Project/Education Cards */
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .project-card {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            border-color: var(--accent-blue);
+            box-shadow: 0 5px 15px var(--shadow-color);
+        }
+
+        .project-title {
+            color: var(--accent-blue);
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .project-meta {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .tech-tag {
+            display: inline-block;
+            background-color: #E0F2FE; /* Very light blue */
+            color: #1D4ED8;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            margin-top: 10px;
+            margin-right: 5px;
+        }
+
+        /* Contact & Footer */
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        footer {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px dashed var(--border-color);
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 20px;
+        }
+        
+        /* Mobile Adjustments */
+        @media (max-width: 640px) {
+            .container {
+                padding: 20px;
+            }
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            .name-title h1 {
+                font-size: 2rem;
+            }
+            .name-title h2 {
+                font-size: 1rem;
+            }
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <!-- Profile Header Section -->
+        <header class="profile-header">
+            <img 
+                class="profile-photo"
+                src=/Users/macbookair/Downloads/IMG_9294.heic
+                alt="Sulaiman Hamma professional headshot wearing a black hat and glasses."
+            >
+            <div class="name-title">
+                <h1>Sulaiman Hamma</h1>
+                <h2>AI Enthusiast, Future Politician, and Data Scientist</h2>
+            </div>
+        </header>
+
+        <!-- New ASCII Art Section -->
+        <section class="ascii-art-container">
+            <pre>
+███████╗██╗   ██╗██╗      █████╗ ██╗███╗   ███╗ █████╗ ███╗   ██╗
+██╔════╝██║   ██║██║     ██╔══██╗██║████╗ ████║██╔══██╗████╗  ██║
+███████╗██║   ██║██║     ███████║██║██╔████╔██║███████║██╔██╗ ██║
+╚════██║██║   ██║██║     ██╔══██║██║██║╚██╔╝██║██╔══██║██║╚██╗██║
+███████║╚██████╔╝███████╗██║  ██║██║██║ ╚═╝ ██║██║  ██║██║ ╚████║
+╚══════╝ ╚═════╝ ╚══════╝╚═╝  ╚═╝╚═╝╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝
+            </pre>
+        </section>
+
+        <!-- About Section -->
+        <section id="about">
+            <h2>About</h2>
+            <p>
+                I'm Sulaiman Hamma — a student at Haliç University, currently studying Management Information Systems (MIS). I am deeply passionate about the intersection of artificial intelligence, technology, and the role of data in shaping better policy and governance in Nigeria.
+            </p>
+            <p style="margin-top: 10px;">
+                My studies in MIS give me a unique perspective, allowing me to bridge technical data science concepts with strategic organizational needs and ethical implementation. I believe in building AI solutions that are not only effective but are also ethical and impactful in addressing real-world challenges, particularly within the political landscape.
+            </p>
+        </section>
+        
+        <!-- Skills Section -->
+        <section id="skills">
+            <h2>Core Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-item">Python</div>
+                <div class="skill-item">SQL</div>
+                <div class="skill-item">HTML</div>
+                <div class="skill-item">PHP</div>
+                <div class="skill-item">Database Management</div>
+                <div class="skill-item">Algorithms & Data Structures</div>
+                <div class="skill-item">Visual Programming</div>
+            </div>
+        </section>
+        
+        <!-- Relevant Projects / Experience Section -->
+        <section id="projects">
+            <h2>Selected Projects & Experience</h2>
+            <div class="projects">
+                <div class="project-card">
+                    <h3 class="project-title">E-commerce Platform for Local Nigerian Goods</h3>
+                    <p class="project-meta">Web Development & MIS Project</p>
+                    <p>Designed and prototyped an e-commerce solution focused on connecting local Nigerian artisans and farmers directly with consumers, aiming to improve market access and transparency. Focused on database security and user-experience design.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">PHP</span>
+                        <span class="tech-tag">HTML/CSS</span>
+                        <span class="tech-tag">Database Management</span>
+                        <span class="tech-tag">UI/UX</span>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h3 class="project-title">AI-Powered Agricultural Tech Solutions</h3>
+                    <p class="project-meta">Data Analysis & Predictive Modeling</p>
+                    <p>Explored and prototyped data-driven solutions for Nigerian agriculture, including predictive models for crop yield estimation and pest detection using public satellite imagery and machine learning algorithms.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Algorithms & DS</span>
+                        <span class="tech-tag">Data Visualization</span>
+                        <span class="tech-tag">Visual Programming</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Education & Certifications Section -->
+        <section id="education">
+            <h2>Education & Certifications</h2>
+            <div class="projects">
+                <div class="project-card">
+                    <h3 class="project-title">B.Sc. Management Information Systems (MIS)</h3>
+                    <p class="project-meta">Haliç University | Student (Expected Graduation: XXXX)</p>
+                    <p>Currently focusing on the intersection of business intelligence, data science principles, and effective IT management strategies.</p>
+                </div>
+                <div class="project-card">
+                    <h3 class="project-title">Oracle Database Management (SQL)</h3>
+                    <p class="project-meta">Professional Training | Completed 2025</p>
+                    <p>Expertise in advanced SQL querying, relational database design, and management using the Oracle platform.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact">
+            <h2>Contact & Social</h2>
+            <div class="contact-info">
+                <p>Email: <a href="mailto:hammasulaiman1@gmail.com">hammasulaiman1@gmail.com</a></p>
+                <p>LinkedIn: <a href="https://tr.linkedin.com/in/sulaiman-hamma-b36281395" target="_blank">linkedin.com/in/sulaiman-hamma-b36281395</a></p>
+                <p>GitHub: <a href="https://github.com/Sulaimanhamma1" target="_blank">github.com/Sulaimanhamma1</a></p>
+                <p>Instagram: <a href="https://instagram.com/imam.hamma" target="_blank">instagram.com/imam.hamma</a></p>
+            </div>
+        </section>
+        
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2025 Sulaiman Hamma. Designed for clarity and impact.</p>
+        </footer>
+    </div>
+</body>
+</html>
