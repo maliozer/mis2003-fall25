@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yusuf Ensar Atmaca | Student</title>
+         class="profile-photo">
+    <h1>YUSUF ENSAR ATMACA</h1>
+</div>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Fira+Code:wght@400;600&family=Source+Code+Pro:wght@400;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --bg-primary: #0a0e0a;
+            --bg-secondary: #1a1f1a;
+            --text-primary: #00ff41;
+            --text-secondary: #00cc33;
+            --text-dim: #008f11;
+            --accent: #39ff14;
+            --error: #ff0040;
+            --warning: #ffaa00;
+            --info: #00ffff;
+            --border: #00ff41;
+        }
+        
+        body {
+            font-family: 'JetBrains Mono', 'Fira Code', 'Source Code Pro', monospace;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* Scanline effect */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                transparent 50%,
+                rgba(0, 255, 65, 0.03) 50%
+            );
+            background-size: 100% 4px;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        /* Glow effect */
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(
+                ellipse at center,
+                transparent 0%,
+                rgba(0, 0, 0, 0.4) 100%
+            );
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* Terminal Header */
+        .terminal-header {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px 8px 0 0;
+            padding: 0.5rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .terminal-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .terminal-button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        
+        .terminal-button.red { background: #ff5f56; }
+        .terminal-button.yellow { background: #ffbd2e; }
+        .terminal-button.green { background: #27c93f; }
+        
+        .terminal-title {
+            flex: 1;
+            text-align: center;
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+        
+        /* Main Terminal */
+        .terminal-body {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+            padding: 2rem;
+            min-height: 500px;
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.1);
+        }
+        
+        /* ASCII Art Header */
+        .ascii-art {
+            color: var(--accent);
+            font-size: 0.7rem;
+            line-height: 1.2;
+            margin-bottom: 2rem;
+            white-space: pre;
+            overflow-x: auto;
+        }
+        
+        /* Typing Animation */
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+        
+        .typing-text {
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 3px solid var(--text-primary);
+            animation: typing 2s steps(40, end), blink 1s step-end infinite;
+            width: fit-content;
+        }
+        
+        /* Command Line Style */
+        .command-line {
+            margin: 1rem 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .prompt {
+            color: var(--text-secondary);
+            margin-right: 0.5rem;
+        }
+        
+        .command {
+            color: var(--info);
+        }
+        
+        .output {
+            margin-left: 2rem;
+            color: var(--text-primary);
+            margin-top: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Section Headers */
+        h1 {
+            font-size: 2rem;
+            color: var(--accent);
+            text-shadow: 0 0 10px rgba(57, 255, 20, 0.5);
+            margin-bottom: 1rem;
+        }
+        
+        h2 {
+            color: var(--text-secondary);
+            font-size: 1.5rem;
+            margin: 2rem 0 1rem 0;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        h2::before {
+            content: "## ";
+            color: var(--text-dim);
+        }
+        
+        h2::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, var(--border) 0%, transparent 100%);
+        }
+        
+        /* Links */
+        a {
+            color: var(--info);
+            text-decoration: none;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        a:hover {
+            color: var(--accent);
+            text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+        }
+        
+        a::after {
+            content: "";
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+        
+        a:hover::after {
+            width: 100%;
+        }
+        
+        /* Navigation */
+        nav {
+            margin-bottom: 3rem;
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        nav li::before {
+            content: "[ ";
+            color: var(--text-dim);
+        }
+        
+        nav li::after {
+            content: " ]";
+            color: var(--text-dim);
+        }
+        
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .skill-item {
+            background: var(--bg-primary);
+            border: 1px solid var(--text-dim);
+            padding: 1rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .skill-item:hover {
+            border-color: var(--accent);
+            box-shadow: 0 0 10px rgba(57, 255, 20, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .skill-name {
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .skill-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--text-dim);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--text-dim), var(--accent));
+            transition: width 1s ease;
+            box-shadow: 0 0 10px rgba(57, 255, 20, 0.5);
+        }
+        
+        /* Project Cards */
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .project-card {
+            background: var(--bg-primary);
+            border: 1px solid var(--text-dim);
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .project-card::before {
+            content: ">";
+            position: absolute;
+            top: 1rem;
+            left: 0.5rem;
+            color: var(--accent);
+            animation: blink 1s step-end infinite;
+        }
+        
+        .project-card:hover {
+            border-color: var(--accent);
+            transform: translateX(10px);
+        }
+        
+        .project-title {
+            color: var(--info);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        .tech-tag {
+            background: var(--bg-secondary);
+            color: var(--text-dim);
+            padding: 0.2rem 0.5rem;
+            border: 1px solid var(--text-dim);
+            font-size: 0.8rem;
+        }
+        
+        /* Contact Section */
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .contact-item::before {
+            content: "$";
+            color: var(--warning);
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 4rem;
+            padding: 2rem;
+            border-top: 1px solid var(--text-dim);
+            color: var(--text-dim);
+        }
+        
+        /* Cursor */
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 20px;
+            background: var(--text-primary);
+            animation: blink 1s step-end infinite;
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .ascii-art {
+                font-size: 0.5rem;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            nav ul {
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Terminal Window -->
+        <div class="terminal-header">
+            <div class="terminal-buttons">
+                <div class="terminal-button red"></div>
+                <div class="terminal-button yellow"></div>
+                <div class="terminal-button green"></div>
+            </div>
+          <div class="terminal-title">yusuf@desktop:~/web-portfolio</div>
+        </div>
+        
+        <div class="terminal-body">
+            <!-- ASCII Art Banner -->
+            <pre class="ascii-art">
+ __     __               __   ______                       
+ \ \   / /              / _| |  ____|                      
+  \ \_/ /   _ ___ _   _| |_  | |__   _ __  ___  __ _ _ __  
+   \   / | | / __| | | |  _| |  __| | '_ \/ __|/ _` | '__| 
+    | || |_| \__ \ |_| | |   | |____| | | \__ \ (_| | |    
+    |_| \__,_|___/\__,_|_|   |______|_| |_|___/\__,_|_|    
+                                                           
+                                                           
+            </pre>
+            
+            <!-- Welcome Message -->
+            <div class="command-line">
+    <span class="prompt">$</span>
+    <span class="command typing-text">whoami</span>
+</div>
+<div class="output">
+    Business Administration Student | Management Information Systems | Programming Learner
+</div>
+            
+            <!-- Navigation -->
+            <nav>
+                <div class="command-line">
+                    <span class="prompt">$</span>
+                    <span class="command">ls ./sections/</span>
+                </div>
+                <ul class="output">
+                    <li><a href="#about">about.md</a></li>
+                    <li><a href="#skills">skills.json</a></li>
+                    <li><a href="#learning">learning/</a></li>        
+                    <li><a href="#education">education.log</a></li>
+                    <li><a href="#current-focus">focus.txt</a></li>     
+                    <li><a href="#contact">contact.txt</a></li>
+                </ul>
+            </nav>
+            
+            <!-- About Section -->
+      <section id="about">
+    <h2>About Me</h2>
+    <div class="command-line">
+        <span class="prompt">$</span>
+        <span class="command">cat about.txt</span>
+    </div>
+    <div class="output">
+        <div style="display: flex; align-items: center; gap: 2rem; flex-wrap: wrap;">
+           <img src="assets/images/yusufensaratmaca.jpg" alt="Yusuf Ensar Atmaca" 
+     style="width: 150px; height: 150px; border-radius: 50%; border: 3px solid #00ff00;">
+            <div style="flex: 1;">
+                <p>Hello! I'm Yusuf Ensar Atmaca, a Business Administration student at Halic University with a growing interest in technology and software development.</p>
+                <p>Currently exploring the intersection of business and technology, learning programming fundamentals while building my foundation in business management.</p>
+            </div>
+        </div>
+    </div>
+</section>
+            
+         <!-- Skills Section -->
+<section id="skills">
+    <h2>Skills</h2>
+    <div class="command-line">
+        <span class="prompt">$</span>
+        <span class="command">npm list --depth=0</span>
+    </div>
+    <div class="output">
+        <div class="skills-grid">
+            <div class="skill-item">
+                <div class="skill-name">HTML & CSS</div>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="width: 65%;"></div>
+                </div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-name">Python Programming</div>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="width: 60%;"></div>
+                </div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-name">C++ Fundamentals</div>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="width: 55%;"></div>
+                </div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-name">Git & GitHub</div>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="width: 70%;"></div>
+                </div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-name">Problem Solving</div>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="width: 75%;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Learning Section -->
+<section id="learning">
+    <h2>Currently Learning</h2>
+    <div class="command-line">
+        <span class="prompt">$</span>
+        <span class="command">ls ./skills/ | head -3</span>
+    </div>
+    <div class="output">
+        <div class="projects">
+            <div class="project-card">
+                <h3 class="project-title">Web Development Fundamentals</h3>
+                <p>Currently learning HTML, CSS through university courses and online resources. Building foundational web development skills.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">HTML</span>
+                    <span class="tech-tag">CSS</span>
+                    <span class="tech-tag">Learning</span>
+                </div>
+            </div>
+            <div class="project-card">
+                <h3 class="project-title">Python Programming</h3>
+                <p>Developing Python programming skills through academic coursework and personal practice. Focusing on fundamentals and problem-solving.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">Programming</span>
+                    <span class="tech-tag">Algorithms</span>
+                    <span class="tech-tag">University</span>
+                </div>
+            </div>
+            <div class="project-card">
+                <h3 class="project-title">Version Control with Git</h3>
+                <p>Learning Git and GitHub for version control and collaboration. This portfolio website is my first hands-on experience with these tools.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">Git</span>
+                    <span class="tech-tag">GitHub</span>
+                    <span class="tech-tag">Version Control</span>
+                    <span class="tech-tag">First Project</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Education Section -->
+<section id="education">
+    <h2>Education</h2>
+    <div class="command-line">
+        <span class="prompt">$</span>
+        <span class="command">tail -n 20 education.log</span>
+    </div>
+    <div class="output">
+        <div class="projects">
+            <div class="project-card">
+                <h3 class="project-title"> - Management Information Systems</h3>
+                <p style="color: var(--text-secondary);">Halic University | 2023 - Present</p>
+                <p>Currently studying Management Information Systems with focus on software development, programming fundamentals, and business technologies.</p>
+            </div>
+            <div class="project-card">
+                <h3 class="project-title">Open High School Diploma</h3>
+                <p style="color: var(--text-secondary);">Açık Öğretim Lisesi | 2023</p>
+                <p>Completed open high school education. Developed self-discipline and independent learning skills through distance education.</p>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Current Focus Section -->
+<section id="current-focus">
+    <h2>Current Focus</h2>
+    <div class="command-line">
+        <span class="prompt">$</span>
+        <span class="command">cat ./current_status.txt</span>
+    </div>
+    <div class="output">
+        <div style="margin-left: 2rem;">
+            <p style="color: var(--info);">→ University Studies</p>
+            <p style="color: var(--info);">→ Programming Fundamentals</p>
+            <p style="color: var(--info);">→ Web Development Basics</p>
+            <p style="color: var(--warning);">★ Learning and growing every day</p>
+        </div>
+    </div>
+</section>
+            <!-- Contact Section -->
+            <section id="contact">
+    <h2>Contact</h2>
+    <div class="command-line">
+        <span class="prompt">$</span>
+        <span class="command">echo $CONTACT_INFO</span>
+    </div>
+    <div class="output">
+        <div class="contact-info">
+            <div class="contact-item">
+    <a href="mailto:yensar1506@gmail.com">yensar1506@gmail.com</a>
+</div>
+            <div class="contact-item">
+                <a href="https://github.com/YusufEnsarAtmaca" target="_blank">github.com/YusufEnsarAtmaca</a>
+            </div>
+        </div>
+    </div>
+</section>
+            
+            <!-- Footer -->
+            <footer>
+                <div class="command-line">
+                    <span class="prompt">$</span>
+                    <span class="command">exit</span>
+                </div>
+                <p>© 2025 Yusuf Ensar Atmaca | Built with patience</p>
+                <p>Last login: <span id="current-date"></span></p>
+                <span class="cursor"></span>
+            </footer>
+        </div>
+    </div>
+    
+    <script>
+        // Set current date
+        document.getElementById('current-date').textContent = new Date().toLocaleString();
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+        
+        // Animate skill bars on scroll
+        const observerOptions = {
+            threshold: 0.5,
+            rootMargin: '0px'
+        };
+        
+        const skillObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const skillBars = entry.target.querySelectorAll('.skill-progress');
+                    skillBars.forEach(bar => {
+                        const width = bar.style.width;
+                        bar.style.width = '0';
+                        setTimeout(() => {
+                            bar.style.width = width;
+                        }, 100);
+                    });
+                }
+            });
+        }, observerOptions);
+        
+        const skillsSection = document.querySelector('#skills');
+        if (skillsSection) {
+            skillObserver.observe(skillsSection);
+        }
+        
+        // Terminal typing effect for dynamic content
+        function typeWriter(element, text, speed = 50) {
+            let i = 0;
+            element.textContent = '';
+            
+            function type() {
+                if (i < text.length) {
+                    element.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            
+            type();
+        }
+        
+        // Add glitch effect on hover for the title
+        const title = document.querySelector('.ascii-art');
+        if (title) {
+            title.addEventListener('mouseenter', () => {
+                title.style.animation = 'glitch 0.3s infinite';
+            });
+            
+            title.addEventListener('mouseleave', () => {
+                title.style.animation = 'none';
+            });
+        }
+        
+        // Add glitch animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes glitch {
+                0% { text-shadow: 0.05em 0 0 #00fffc, -0.05em -0.025em 0 #fc00ff, 0.025em 0.05em 0 #fffc00; }
+                15% { text-shadow: 0.05em 0 0 #00fffc, -0.05em -0.025em 0 #fc00ff, 0.025em 0.05em 0 #fffc00; }
+                16% { text-shadow: -0.05em -0.025em 0 #00fffc, 0.025em 0.025em 0 #fc00ff, -0.05em -0.05em 0 #fffc00; }
+                49% { text-shadow: -0.05em -0.025em 0 #00fffc, 0.025em 0.025em 0 #fc00ff, -0.05em -0.05em 0 #fffc00; }
+                50% { text-shadow: 0.025em 0.05em 0 #00fffc, 0.05em 0 0 #fc00ff, 0 -0.05em 0 #fffc00; }
+                99% { text-shadow: 0.025em 0.05em 0 #00fffc, 0.05em 0 0 #fc00ff, 0 -0.05em 0 #fffc00; }
+                100% { text-shadow: -0.025em 0 0 #00fffc, -0.025em -0.025em 0 #fc00ff, -0.025em -0.05em 0 #fffc00; }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
