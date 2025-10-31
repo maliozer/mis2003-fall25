@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><Sahin Alcayir> | Student</title>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Fira+Code:wght@400;600&family=Source+Code+Pro:wght@400;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --bg-primary: #0a0e0a;
+            --bg-secondary: #1a1f1a;
+            --text-primary: #00ff41;
+            --text-secondary: #00cc33;
+            --text-dim: #008f11;
+            --accent: #39ff14;
+            --error: #ff0040;
+            --warning: #ffaa00;
+            --info: #00ffff;
+            --border: #00ff41;
+        }
+        
+        body {
+            font-family: 'JetBrains Mono', 'Fira Code', 'Source Code Pro', monospace;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* Scanline effect */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                transparent 50%,
+                rgba(0, 255, 65, 0.03) 50%
+            );
+            background-size: 100% 4px;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        /* Glow effect */
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(
+                ellipse at center,
+                transparent 0%,
+                rgba(0, 0, 0, 0.4) 100%
+            );
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* Terminal Header */
+        .terminal-header {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px 8px 0 0;
+            padding: 0.5rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .terminal-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .terminal-button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        
+        .terminal-button.red { background: #ff5f56; }
+        .terminal-button.yellow { background: #ffbd2e; }
+        .terminal-button.green { background: #27c93f; }
+        
+        .terminal-title {
+            flex: 1;
+            text-align: center;
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+        
+        /* Main Terminal */
+        .terminal-body {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+            padding: 2rem;
+            min-height: 500px;
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.1);
+        }
+        
+        /* ASCII Art Header */
+        .ascii-art {
+            color: var(--accent);
+            font-size: 0.7rem;
+            line-height: 1.2;
+            margin-bottom: 2rem;
+            white-space: pre;
+            overflow-x: auto;
+        }
+        
+        /* Typing Animation */
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+        
+        .typing-text {
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 3px solid var(--text-primary);
+            animation: typing 2s steps(40, end), blink 1s step-end infinite;
+            width: fit-content;
+        }
+        
+        /* Command Line Style */
+        .command-line {
+            margin: 1rem 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .prompt {
+            color: var(--text-secondary);
+            margin-right: 0.5rem;
+        }
+        
+        .command {
+            color: var(--info);
+        }
+        
+        .output {
+            margin-left: 2rem;
+            color: var(--text-primary);
+            margin-top: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Section Headers */
+        h1 {
+            font-size: 2rem;
+            color: var(--accent);
+            text-shadow: 0 0 10px rgba(57, 255, 20, 0.5);
+            margin-bottom: 1rem;
+        }
+        
+        h2 {
+            color: var(--text-secondary);
+            font-size: 1.5rem;
+            margin: 2rem 0 1rem 0;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        h2::before {
+            content: "## ";
+            color: var(--text-dim);
+        }
+        
+        h2::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, var(--border) 0%, transparent 100%);
+        }
+        
+        /* Links */
+        a {
+            color: var(--info);
+            text-decoration: none;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        a:hover {
+            color: var(--accent);
+            text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+        }
+        
+        a::after {
+            content: "";
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+        
+        a:hover::after {
+            width: 100%;
+        }
+        
+        /* Navigation */
+        nav {
+            margin-bottom: 3rem;
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        nav li::before {
+            content: "[ ";
+            color: var(--text-dim);
+        }
+        
+        nav li::after {
+            content: " ]";
+            color: var(--text-dim);
+        }
+        
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .skill-item {
+            background: var(--bg-primary);
+            border: 1px solid var(--text-dim);
+            padding: 1rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .skill-item:hover {
+            border-color: var(--accent);
+            box-shadow: 0 0 10px rgba(57, 255, 20, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .skill-name {
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .skill-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--text-dim);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--text-dim), var(--accent));
+            transition: width 1s ease;
+            box-shadow: 0 0 10px rgba(57, 255, 20, 0.5);
+        }
+        
+        /* Project Cards */
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .project-card {
+            background: var(--bg-primary);
+            border: 1px solid var(--text-dim);
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .project-card::before {
+            content: ">";
+            position: absolute;
+            top: 1rem;
+            left: 0.5rem;
+            color: var(--accent);
+            animation: blink 1s step-end infinite;
+        }
+        
+        .project-card:hover {
+            border-color: var(--accent);
+            transform: translateX(10px);
+        }
+        
+        .project-title {
+            color: var(--info);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        .tech-tag {
+            background: var(--bg-secondary);
+            color: var(--text-dim);
+            padding: 0.2rem 0.5rem;
+            border: 1px solid var(--text-dim);
+            font-size: 0.8rem;
+        }
+        
+        /* Contact Section */
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .contact-item::before {
+            content: "$";
+            color: var(--warning);
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 4rem;
+            padding: 2rem;
+            border-top: 1px solid var(--text-dim);
+            color: var(--text-dim);
+        }
+        
+        /* Cursor */
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 20px;
+            background: var(--text-primary);
+            animation: blink 1s step-end infinite;
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .ascii-art {
+                font-size: 0.5rem;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            nav ul {
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Terminal Window -->
+        <div class="terminal-header">
+            <div class="terminal-buttons">
+                <div class="terminal-button red"></div>
+                <div class="terminal-button yellow"></div>
+                <div class="terminal-button green"></div>
+            </div>
+            <div class="terminal-title">maliozer@ai-workstation:~/portfolio</div>
+        </div>
+        
+        <div class="terminal-body">
+            <!-- ASCII Art Banner -->
+            <pre class="ascii-art">
+ ███████╗ █████╗ ██╗  ██╗ ██████╗  ██████╗ 
+ ██╔════╝██╔══██╗██║ ██╔╝██╔═══██╗██╔═══██╗
+ ███████╗███████║███████╔╝ ██║   ██║██║   ██║
+ ╚════██║██╔══██║██╔═████╗ ██║   ██║██║   ██║
+ ███████║██║  ██║██║  ██╗╚██████╔╝╚██████╔╝
+ ╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝  ╚═════╝ 
+            </pre>
+            
+            <!-- Welcome Message -->
+            <div class="command-line">
+                <span class="prompt">$</span>
+                <span class="command typing-text">whoami</span>
+            </div>
+            <div class="output">
+               Entrepreneur  | Freelance Graphic Designer | Animallover | Student @ Haliç University
+            </div>
+            
+            <!-- Navigation -->
+            <nav>
+                <div class="command-line">
+                    <span class="prompt">$</span>
+                    <span class="command">ls ./sections/</span>
+                </div>
+                <ul class="output">
+                    <li><a href="#about">about.md</a></li>
+                    <li><a href="#skills">skills.json</a></li>
+                    <li><a href="#publications">publications/</a></li>
+                    <li><a href="#education">education.log</a></li>
+                    <li><a href="#certifications">certs.txt</a></li>
+                    <li><a href="#contact">contact.txt</a></li>
+                </ul>
+            </nav>
+            
+            <!-- About Section -->
+            <section id="about">
+                <h2>About</h2>
+                <div class="command-line">
+                    <span class="prompt">$</span>
+                    <span class="command">cat about.md</span>
+                </div>
+                <div class="output">
+                    <p>Hello, World! I'm Sahin Alcayir, I'm currently studying in Haliç University.Also i have an underground clothing brand it called Fukk. 
+                    <p>Nowadays i'm trying to improve my skills on Python,Machine Learning and some Ai stuffs.</p>
+                    <br>
+                    <p>Also i am making some design and graphics for clients and companies.I'm proffesional-level Photoshop user.If you want good graphics for your business just contact me!</p>
+                    <br>
+                    <p>For my designs check out my IG account <a href="https://instagram.com/sahoodoesthings" target="_blank">sahoodoesthings</a> where I recording videos about PSD and PP programs..</p>
+                </div>
+            </section>
+            
+            <!-- Skills Section -->
+            <section id="skills">
+                <h2>Skills</h2>
+                <div class="command-line">
+                    <span class="prompt">$</span>
+                    <span class="command">npm list --depth=0</span>
+                </div>
+                <div class="output">
+                    <div class="skills-grid">
+                        <div class="skill-item">
+                            <div class="skill-name">Adobe Photoshop </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 95%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">Python/PyTorch</div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 25%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">Premiere Pro</div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width:60%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">Ai Prompts</div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 75%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">Canva</div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 88%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            
+            
+            <!-- Education Section -->
+            <section id="education">
+                <h2>Education</h2>
+                <div class="command-line">
+                    <span class="prompt">$</span>
+                    <span class="command"></span>
+                </div>
+                <div class="output">
+                    <div class="projects">
+                        <div class="project-card">
+                            <h3 class="project-title">High School - Fen Bilimleri</h3>
+                            <p style="color: var(--text-secondary);"> 2016 - 2020</p>
+                         
+                        </div>
+                        <div class="project-card">
+                            <h3 class="project-title">Management Information Systems</h3>
+                            <p style="color: var(--text-secondary);">Halic University | 2021 - 202.......</p>
+                            
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Certifications Section -->
+            <section id="certifications">
+                <h2>Certifications & Awards</h2>
+                <div class="command-line">
+                    <span class="prompt">$</span>
+                    <span class="command">ls -la ./certifications/</span>
+                </div>
+                <div class="output">
+                    <div style="margin-left: 2rem;">
+                        <p style="color: var(--info);">→ Ai Prompts by Coursera</p>
+                        <p style="color: var(--info);">→ Design Thinking by ODTU</p>
+                        <p style="color: var(--info);">→ Adobe Lightroom CC by ODTU,</p>
+                        <p style="color: var(--info);">→ Intro to Generative Ai by Google</p>
+                        <p style="color: var(--info);">→ Fundamentals of Digital Marketing by Google</p>
+                        
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Contact Section -->
+            <section id="contact">
+                <h2>Contact</h2>
+                <div class="command-line">
+                    <span class="prompt">$</span>
+                    <span class="command">echo $CONTACT_INFO</span>
+                </div>
+                <div class="output">
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <a href="mailto:sahin.alcayir@icloud.com">sahin.alcayir@icloud.com</a>
+                        </div>
+                        <div class="contact-item">
+                            <a href="www.linkedin.com/in/şahin-alçayır" target="_blank">linkedin.com/in/şahin-alçayır</a>
+                        </div>
+                        <div class="contact-item">
+                            <a href="https://github.com/maliozer" target="_blank">github.com/sah</a>
+                        </div>
+                        <div class="contact-item">
+                            <a href="https://safenlp.substack.com/" target="_blank">safenlp.substack.com</a>
+                        </div>
+                        <div class="contact-item">
+                            <a href="https://safenlp.org" target="_blank">safenlp.org</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Footer -->
+            <footer>
+                <div class="command-line">
+                    <span class="prompt">$</span>
+                    <span class="command">exit</span>
+                </div>
+                <p>© 2024 Mehmet Ali Özer | Built with &lt;3 and lots of coffee</p>
+                <p>Last login: <span id="current-date"></span></p>
+                <span class="cursor"></span>
+            </footer>
+        </div>
+    </div>
+    
+    <script>
+        // Set current date
+        document.getElementById('current-date').textContent = new Date().toLocaleString();
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+        
+        // Animate skill bars on scroll
+        const observerOptions = {
+            threshold: 0.5,
+            rootMargin: '0px'
+        };
+        
+        const skillObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const skillBars = entry.target.querySelectorAll('.skill-progress');
+                    skillBars.forEach(bar => {
+                        const width = bar.style.width;
+                        bar.style.width = '0';
+                        setTimeout(() => {
+                            bar.style.width = width;
+                        }, 100);
+                    });
+                }
+            });
+        }, observerOptions);
+        
+        const skillsSection = document.querySelector('#skills');
+        if (skillsSection) {
+            skillObserver.observe(skillsSection);
+        }
+        
+        // Terminal typing effect for dynamic content
+        function typeWriter(element, text, speed = 50) {
+            let i = 0;
+            element.textContent = '';
+            
+            function type() {
+                if (i < text.length) {
+                    element.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            
+            type();
+        }
+        
+        // Add glitch effect on hover for the title
+        const title = document.querySelector('.ascii-art');
+        if (title) {
+            title.addEventListener('mouseenter', () => {
+                title.style.animation = 'glitch 0.3s infinite';
+            });
+            
+            title.addEventListener('mouseleave', () => {
+                title.style.animation = 'none';
+            });
+        }
+        
+        // Add glitch animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes glitch {
+                0% { text-shadow: 0.05em 0 0 #00fffc, -0.05em -0.025em 0 #fc00ff, 0.025em 0.05em 0 #fffc00; }
+                15% { text-shadow: 0.05em 0 0 #00fffc, -0.05em -0.025em 0 #fc00ff, 0.025em 0.05em 0 #fffc00; }
+                16% { text-shadow: -0.05em -0.025em 0 #00fffc, 0.025em 0.025em 0 #fc00ff, -0.05em -0.05em 0 #fffc00; }
+                49% { text-shadow: -0.05em -0.025em 0 #00fffc, 0.025em 0.025em 0 #fc00ff, -0.05em -0.05em 0 #fffc00; }
+                50% { text-shadow: 0.025em 0.05em 0 #00fffc, 0.05em 0 0 #fc00ff, 0 -0.05em 0 #fffc00; }
+                99% { text-shadow: 0.025em 0.05em 0 #00fffc, 0.05em 0 0 #fc00ff, 0 -0.05em 0 #fffc00; }
+                100% { text-shadow: -0.025em 0 0 #00fffc, -0.025em -0.025em 0 #fc00ff, -0.025em -0.05em 0 #fffc00; }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
