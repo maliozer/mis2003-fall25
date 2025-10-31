@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mert Hüdadat | MIS Student</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
+    *{margin:0;padding:0;box-sizing:border-box}
+    :root{
+      --bg-primary:#0a0e0a;--bg-secondary:#1a1f1a;
+      --text-primary:#00ff41;--text-secondary:#00cc33;--text-dim:#008f11;
+      --accent:#39ff14;--warning:#ffaa00;--info:#00ffff;--border:#00ff41;
+    }
+    body{font-family:'JetBrains Mono',monospace;background:var(--bg-primary);color:var(--text-primary);min-height:100vh;overflow-x:hidden;position:relative}
+    body::before{content:"";position:fixed;inset:0;background:linear-gradient(transparent 50%,rgba(0,255,65,.03) 50%);background-size:100% 4px;pointer-events:none;z-index:1}
+    body::after{content:"";position:fixed;inset:0;background:radial-gradient(ellipse at center,transparent 0%,rgba(0,0,0,.4) 100%);pointer-events:none;z-index:1}
+    .container{max-width:1100px;margin:0 auto;padding:24px;position:relative;z-index:2}
+    .terminal-header{background:var(--bg-secondary);border:1px solid var(--border);border-radius:8px 8px 0 0;padding:8px 14px;display:flex;align-items:center;gap:8px}
+    .terminal-buttons{display:flex;gap:8px}
+    .terminal-button{width:12px;height:12px;border-radius:50%}
+    .terminal-button.red{background:#ff5f56}.terminal-button.yellow{background:#ffbd2e}.terminal-button.green{background:#27c93f}
+    .terminal-title{flex:1;text-align:center;color:var(--text-dim);font-size:.9rem}
+    .terminal-body{background:var(--bg-secondary);border:1px solid var(--border);border-top:none;border-radius:0 0 8px 8px;padding:24px;box-shadow:0 0 20px rgba(0,255,65,.1)}
+    .ascii-art{color:var(--accent);font-size:1.1rem;line-height:1.1;margin-bottom:20px;white-space:pre;overflow-x:auto;text-align:center}
+    @keyframes blink{50%{opacity:0}}
+    .command-line{margin:12px 0;display:flex;align-items:center}
+    .prompt{color:var(--text-secondary);margin-right:8px}
+    .command{color:var(--info)}
+    .output{margin-left:24px;color:var(--text-primary);margin-top:6px;margin-bottom:18px}
+    h2{color:var(--text-secondary);font-size:1.25rem;margin:22px 0 10px;position:relative;padding-bottom:6px}
+    h2::before{content:"## ";color:var(--text-dim)}
+    h2::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:linear-gradient(90deg,var(--border) 0%,transparent 100%)}
+    a{color:var(--info);text-decoration:none;position:relative;transition:.2s}
+    a:hover{color:var(--accent);text-shadow:0 0 5px rgba(0,255,255,.5)}
+    .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:14px 0}
+    .skill-item{background:var(--bg-primary);border:1px solid var(--text-dim);padding:12px;transition:.2s}
+    .skill-item:hover{border-color:var(--accent);box-shadow:0 0 10px rgba(57,255,20,.3);transform:translateY(-2px)}
+    .skill-name{color:var(--text-secondary);margin-bottom:6px}
+    .skill-bar{width:100%;height:8px;background:var(--bg-secondary);border:1px solid var(--text-dim)}
+    .skill-progress{height:100%;background:linear-gradient(90deg,var(--text-dim),var(--accent))}
+    .projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;margin:16px 0}
+    .project-card{background:var(--bg-primary);border:1px solid var(--text-dim);padding:14px;position:relative;transition:.2s}
+    .project-card::before{content:">";position:absolute;top:10px;left:8px;color:var(--accent);animation:blink 1s step-end infinite}
+    .project-card:hover{border-color:var(--accent);transform:translateX(6px)}
+    .project-title{color:var(--info);font-size:1.05rem;margin-bottom:6px}
+    .contact-info{display:flex;flex-wrap:wrap;gap:16px;margin:10px 0}
+    .contact-item::before{content:"$ ";color:var(--warning)}
+    footer{text-align:center;margin-top:26px;padding:18px;border-top:1px solid var(--text-dim);color:var(--text-dim)}
+    .about-wrap{display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap}
+    .avatar{width:140px;height:140px;border-radius:8px;border:2px solid var(--border);object-fit:cover}
+    @media (max-width:768px){.container{padding:14px}.ascii-art{font-size:.9rem}}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="terminal-header">
+      <div class="terminal-buttons">
+        <div class="terminal-button red"></div>
+        <div class="terminal-button yellow"></div>
+        <div class="terminal-button green"></div>
+      </div>
+      <div class="terminal-title">mert@mis2003:~/portfolio</div>
+    </div>
+
+    <div class="terminal-body">
+<pre class="ascii-art">MERT HÜDADAT</pre>
+
+      <div class="command-line"><span class="prompt">$</span><span class="command">whoami</span></div>
+      <div class="output">
+        MIS Student @ Haliç University | Python & C# basics | Git/GitHub | Fitness & Motorcycles
+      </div>
+
+      <nav>
+        <div class="command-line"><span class="prompt">$</span><span class="command">ls ./sections/</span></div>
+        <ul class="output">
+          <li><a href="#about">about.md</a></li>
+          <li><a href="#skills">skills.json</a></li>
+          <li><a href="#projects">projects/</a></li>
+          <li><a href="#education">education.log</a></li>
+          <li><a href="#contact">contact.txt</a></li>
+        </ul>
+      </nav>
+
+      <section id="about">
+        <h2>About</h2>
+        <div class="command-line"><span class="prompt">$</span><span class="command">cat about.md</span></div>
+        <div class="output about-wrap">
+          <img class="avatar" src="mert.jpg" alt="Mert Hüdadat" />
+          <div>
+            <p>Selam! Ben <b>Mert Hüdadat</b>. Haliç Üniversitesi'nde İngilizce <b>Yönetim Bilişim Sistemleri (MIS)</b> 1. sınıf öğrencisiyim.
+            Yazılım temellerini öğreniyorum ve ders projelerinde Git/GitHub akışını aktif kullanıyorum.</p><br/>
+            <p>İlgi alanlarım: Python/C# ile algoritmalar, web temelleri, verimli çalışma alışkanlıkları. Uzun yıllardır fitness ile ilgileniyorum ve motosiklet tutkunu biriyim.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="skills">
+        <h2>Skills</h2>
+        <div class="command-line"><span class="prompt">$</span><span class="command">npm list --depth=0</span></div>
+        <div class="output">
+          <div class="skills-grid">
+            <div class="skill-item"><div class="skill-name">Python (Temel)</div><div class="skill-bar"><div class="skill-progress" style="width:80%"></div></div></div>
+            <div class="skill-item"><div class="skill-name">C# / Visual Studio</div><div class="skill-bar"><div class="skill-progress" style="width:75%"></div></div></div>
+            <div class="skill-item"><div class="skill-name">HTML / CSS</div><div class="skill-bar"><div class="skill-progress" style="width:70%"></div></div></div>
+            <div class="skill-item"><div class="skill-name">Git & GitHub</div><div class="skill-bar"><div class="skill-progress" style="width:78%"></div></div></div>
+            <div class="skill-item"><div class="skill-name">Problem Solving</div><div class="skill-bar"><div class="skill-progress" style="width:82%"></div></div></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="projects">
+        <h2>Projects</h2>
+        <div class="command-line"><span class="prompt">$</span><span class="command">ls -la ./projects/ | head -3</span></div>
+        <div class="output">
+          <div class="projects">
+            <div class="project-card">
+              <h3 class="project-title">HW5 – Personal Web Page</h3>
+              <p>Template tabanlı kişisel web sayfası. Git akışı: fork → clone → commit → push → PR.</p>
+              <div class="project-tech"><span class="tech-tag">HTML</span> <span class="tech-tag">CSS</span> <span class="tech-tag">Git</span></div>
+            </div>
+            <div class="project-card">
+              <h3 class="project-title">Linear vs Binary Search</h3>
+              <p>Python ile iki arama algoritmasının karşılaştırılması ve Big-O tartışması.</p>
+              <div class="project-tech"><span class="tech-tag">Python</span> <span class="tech-tag">Algorithms</span></div>
+            </div>
+            <div class="project-card">
+              <h3 class="project-title">LeetCode – Single Number</h3>
+              <p>Set ve XOR yaklaşımlarının analizi; temiz ve açıklamalı Python çözümü.</p>
+              <div class="project-tech"><span class="tech-tag">Python</span> <span class="tech-tag">DS&A</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="education">
+        <h2>Education</h2>
+        <div class="command-line"><span class="prompt">$</span><span class="command">tail -n 20 education.log</span></div>
+        <div class="output">
+          <div class="projects">
+            <div class="project-card">
+              <h3 class="project-title">B.Sc. – Management Information Systems (English)</h3>
+              <p style="color:var(--text-secondary)">Haliç University | 2024 – present</p>
+              <p>Dersler: MIS126 Introduction to Programming, ENG102, İşletme/Ekonomi temelleri…</p>
+            </div>
+            <div class="project-card">
+              <h3 class="project-title">High School</h3>
+              <p style="color:var(--text-secondary)">—</p>
+              <p>Sayısal ağırlıklı müfredat; temel programlama ve ofis uygulamaları.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact">
+        <h2>Contact</h2>
+        <div class="command-line"><span class="prompt">$</span><span class="command">echo $CONTACT_INFO</span></div>
+        <div class="output">
+          <div class="contact-info">
+            <div class="contact-item"><a href="mailto:hudadat27@gmail.com">hudadat27@gmail.com</a></div>
+            <div class="contact-item"><a href="https://github.com/hudadat34" target="_blank">github.com/hudadat34</a></div>
+            <div class="contact-item"><a href="https://www.instagram.com/hudadat34/" target="_blank">instagram.com/hudadat34</a></div>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        <div class="command-line"><span class="prompt">$</span><span class="command">exit</span></div>
+        <p>© <span id="year"></span> Mert Hüdadat</p>
+        <p>Last login: <span id="current-date"></span></p>
+      </footer>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('current-date').textContent = new Date().toLocaleString();
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
