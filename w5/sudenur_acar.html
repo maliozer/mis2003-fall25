@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sudenur Acar | YBS Öğrencisi & Ürün Yöneticisi Adayı</title>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --bg-primary: #fdf6f7;
+            --bg-secondary: #ffffff;
+            --text-primary: #333132;
+            --text-secondary: #5c5a5b;
+            --accent: #d94c75;
+            --border: #f0e2e5;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+        }
+        
+        .container { max-width: 960px; margin: 0 auto; padding: 2.5rem 1.5rem; }
+        
+        .terminal-window {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+
+        .terminal-header {
+            background: #f7f0f2;
+            padding: 0.5rem 1rem;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .terminal-buttons { display: flex; gap: 0.5rem; }
+        .terminal-button { width: 12px; height: 12px; border-radius: 50%; border: 1px solid rgba(0,0,0,0.05); }
+        .terminal-button.red { background: #ff5f56; }
+        .terminal-button.yellow { background: #ffbd2e; }
+        .terminal-button.green { background: #27c93f; }
+        
+        .terminal-title { flex: 1; text-align: center; color: var(--text-secondary); font-size: 0.8rem; font-weight: 600; }
+        
+        .terminal-body { padding: 1.5rem 2rem; }
+        
+        /* ASCII ART İÇİN STİL */
+        .ascii-art {
+            color: var(--accent);
+            font-family: 'JetBrains Mono', monospace; /* ASCII için özel font */
+            font-size: 0.8rem;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            white-space: pre;
+            overflow-x: auto;
+            text-align: center;
+        }
+
+        .command-line { margin-top: 2rem; margin-bottom: 1rem; display: flex; align-items: center; }
+        .prompt { color: var(--accent); margin-right: 0.5rem; font-weight: bold; font-size: 1.2rem; }
+        .command { color: var(--text-primary); }
+
+        .output { margin-top: 0.5rem; margin-bottom: 1.5rem; color: var(--text-secondary); line-height: 1.6; }
+        .output h3 { font-size: 1.5rem; color: var(--text-primary); margin-bottom: 0.25rem; }
+
+        h2 {
+            color: var(--accent);
+            font-size: 1.75rem;
+            margin: 2.5rem 0 1rem 0;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border);
+        }
+        
+        a { color: var(--accent); text-decoration: none; font-weight: 600; }
+        a:hover { text-decoration: underline; }
+        
+        nav ul { list-style: none; display: flex; gap: 1.5rem; flex-wrap: wrap; padding: 0; }
+        nav li::before, nav li::after { content: ""; }
+        
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+        .skill-item {
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            padding: 1rem;
+            border-radius: 6px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .skill-item:hover { transform: translateY(-3px); box-shadow: 0 4px 8px rgba(0,0,0,0.05); }
+        .skill-name { color: var(--text-primary); font-weight: 600; margin-bottom: 0.5rem; }
+        .skill-bar { width: 100%; height: 8px; background: #e9ecef; border-radius: 4px; overflow: hidden;}
+        .skill-progress { height: 100%; background: var(--accent); }
+        
+        .projects-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin: 2rem 0; }
+        .project-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            border-radius: 6px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .project-card:hover { transform: translateY(-5px); box-shadow: 0 6px 12px rgba(0,0,0,0.08); }
+        .project-title { color: var(--text-primary); font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .project-meta { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem; }
+        .project-tech { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+        .tech-tag {
+            background: #f7f0f2; color: var(--accent);
+            padding: 0.25rem 0.75rem; border-radius: 1rem; font-size: 0.8rem; font-weight: 600;
+        }
+        
+        .contact-info { display: flex; flex-wrap: wrap; gap: 1.5rem; margin: 2rem 0; font-size: 1.1rem; }
+        
+        footer { text-align: center; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); color: #888; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <div class="terminal-buttons">
+                    <div class="terminal-button red"></div>
+                    <div class="terminal-button yellow"></div>
+                    <div class="terminal-button green"></div>
+                </div>
+                <div class="terminal-title">sudenuracar-portfolio</div>
+            </div>
+            
+            <div class="terminal-body">
+                
+                <pre class="ascii-art">
+ ██████╗ ██╗   ██╗██████╗ ███████╗     █████╗  ██████╗ █████╗ ██████╗ 
+██╔════╝ ██║   ██║██╔══██╗██╔════╝    ██╔══██╗██╔════╝██╔══██╗██╔══██╗
+╚█████╗  ██║   ██║██║  ██║█████╗      ███████║██║     ███████║██████╔╝
+ ╚═══██╗ ██║   ██║██║  ██║██╔══╝      ██╔══██║██║     ██╔══██║██╔══██╗
+██████╔╝ ╚██████╔╝██████╔╝███████╗    ██║  ██║╚██████╗██║  ██║██║  ██║
+╚═════╝   ╚═════╝ ╚═════╝ ╚══════╝    ╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝
+                </pre>
+
+                <div class="command-line">
+                    <span class="prompt">$</span>
+                    <span class="command">whoami</span>
+                </div>
+                <div class="output">
+                    <h3>Sudenur Acar</h3>
+                    <p>Yönetim Bilişim Sistemleri (YBS) 3. Sınıf Öğrencisi</p>
+                </div>
+                
+                <nav>
+                    <div class="command-line">
+                        <span class="prompt">$</span>
+                        <span class="command">ls -a</span>
+                    </div>
+                    <ul class="output">
+                        <li><a href="#about">./hakkimda</a></li>
+                        <li><a href="#skills">./yetenekler</a></li>
+                        <li><a href="#projects">./projeler</a></li>
+                        <li><a href="#education">./egitim</a></li>
+                        <li><a href="#contact">./iletisim</a></li>
+                    </ul>
+                </nav>
+                
+                <section id="about">
+                    <h2>Hakkımda</h2>
+                    <div class="output">
+                        <p>Merhaba! Ben Sudenur. Teknoloji ve iş dünyasını bir araya getiren Yönetim Bilişim Sistemleri alanında 3. sınıf öğrencisiyim. İnsanların problemlerini anlama ve bu problemlere teknolojiyle yenilikçi çözümler üretme tutkusuyla kariyerimi Ürün Yöneticiliği üzerine kurmayı hedefliyorum.</p>
+                        <p>Sürekli öğrenmeye açık, farklı disiplinlerden ekiplerle iş birliği yapmayı önemseyen ve çözüm odaklı bir yaklaşım sergileyen biriyim. Karmaşık problemleri basitleştirme ve anlamlı içgörüler üretme konusunda güçlü bir motivasyona sahibim. Hedefim, hem teknik hem stratejik bakış açısını birleştirerek değer yaratacak projelerde aktif rol almak ve sürekli gelişim göstermektir.</p>
+                    </div>
+                </section>
+                
+                <section id="skills">
+                    <h2>Yetenekler</h2>
+                    <div class="skills-grid">
+                        <div class="skill-item">
+                            <div class="skill-name">Problem Çözme</div>
+                            <div class="skill-bar"><div class="skill-progress" style="width: 90%;"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">Liderlik & Sorumluluk</div>
+                            <div class="skill-bar"><div class="skill-progress" style="width: 85%;"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">Stratejik Düşünme</div>
+                            <div class="skill-bar"><div class="skill-progress" style="width: 80%;"></div></div>
+                        </div>
+                         <div class="skill-item">
+                            <div class="skill-name">Empati & Kullanıcı Odaklılık</div>
+                            <div class="skill-bar"><div class="skill-progress" style="width: 95%;"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">HTML & CSS</div>
+                            <div class="skill-bar"><div class="skill-progress" style="width: 75%;"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">C# Temelleri</div>
+                            <div class="skill-bar"><div class="skill-progress" style="width: 60%;"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">Muhasebe Temelleri</div>
+                            <div class="skill-bar"><div class="skill-progress" style="width: 80%;"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">İngilizce (C1 Hedef)</div>
+                            <div class="skill-bar"><div class="skill-progress" style="width: 85%;"></div></div>
+                        </div>
+                    </div>
+                </section>
+                
+                <section id="projects">
+                    <h2>Projeler</h2>
+                    <div class="projects-grid">
+                        <div class="project-card">
+                            <h3 class="project-title">C# Stok Piyasası Analiz Ödevi</h3>
+                            <p class="project-meta">Borsa verilerini analiz eden ve temel göstergeleri kullanıcıya sunan bir masaüstü uygulaması.</p>
+                            <div class="project-tech">
+                                <span class="tech-tag">C#</span>
+                                <span class="tech-tag">Visual Studio</span>
+                                <span class="tech-tag">Veri Analizi</span>
+                            </div>
+                        </div>
+                        <div class="project-card">
+                            <h3 class="project-title">MILLASSTE - Lüks Giyim Markası Konsepti</h3>
+                             <p class="project-meta">"MILLASSTE" adıyla bir lüks giyim markası için logo tasarımı, marka kimliği ve pazar konumlandırma konsepti.</p>
+                            <div class="project-tech">
+                                <span class="tech-tag">Marka Yönetimi</span>
+                                <span class="tech-tag">Tasarım</span>
+                                <span class="tech-tag">Pazarlama</span>
+                            </div>
+                        </div>
+                        <div class="project-card">
+                            <h3 class="project-title">Kişisel Portfolyo Sitesi (Bu Site)</h3>
+                             <p class="project-meta">HTML, CSS ve Git kullanılarak oluşturulan, kişisel yetenek ve projeleri sergileyen web sayfası.</p>
+                            <div class="project-tech">
+                                <span class="tech-tag">HTML</span>
+                                <span class="tech-tag">CSS</span>
+                                <span class="tech-tag">Git</span>
+                                <span class="tech-tag">GitHub</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <section id="education">
+                    <h2>Eğitim</h2>
+                    <div class="projects-grid">
+                         <div class="project-card">
+                            <h3 class="project-title">Yönetim Bilişim Sistemleri (Lisans)</h3>
+                            <p class="project-meta">Haliç Üniversitesi | 2023 - 2027 (Beklenen)</p>
+                        </div>
+                        <div class="project-card">
+                            <h3 class="project-title">Bilgisayar Programcılığı (Önlisans - Açıköğretim)</h3>
+                            <p class="project-meta">Anadolu Üniversitesi | 2025 - 2027 (Beklenen)</p>
+                        </div>
+                    </div>
+                </section>
+                
+                <section id="contact">
+                    <h2>İletişim</h2>
+                    <div class="contact-info">
+                        <a href="mailto:sudenuracar7@gmail.com">sudenuracar7@gmail.com</a>
+                        <a href="https://www.linkedin.com/in/sude-nur-acar-630217330/" target="_blank">LinkedIn</a>
+                        <a href="https://github.com/Sudenuracar" target="_blank">GitHub</a>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <footer>
+            <p>© <span id="current-year"></span> Sudenur Acar</p>
+        </footer>
+    </div>
+    <script>
+        // Footer'daki yılı otomatik olarak ayarla
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
