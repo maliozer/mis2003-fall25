@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taha Faddaoui | Student </title>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Fira+Code:wght@400;600&family=Source+Code+Pro:wght@400;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --bg-primary: #0a0e0a;
+            --bg-secondary: #1a1f1a;
+            --text-primary: #0bb9f9;
+            --text-secondary: #08d2fa;
+            --text-dim: #06f3e3;
+            --accent: #14bcff;
+            --error: #ff0040;
+            --warning: #ffaa00;
+            --info: #00ffff;
+            --border: #06cff7;
+        }
+        
+        body {
+            font-family: 'JetBrains Mono', 'Fira Code', 'Source Code Pro', monospace;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* Scanline effect */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                transparent 50%,
+                rgba(0, 255, 65, 0.03) 50%
+            );
+            background-size: 100% 4px;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        /* Glow effect */
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(
+                ellipse at center,
+                transparent 0%,
+                rgba(0, 0, 0, 0.4) 100%
+            );
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* Terminal Header */
+        .terminal-header {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px 8px 0 0;
+            padding: 0.5rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .terminal-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .terminal-button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        
+        .terminal-button.red { background: #ff5f56; }
+        .terminal-button.yellow { background: #ffbd2e; }
+        .terminal-button.green { background: #27c93f; }
+        
+        .terminal-title {
+            flex: 1;
+            text-align: center;
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+        
+        /* Main Terminal */
+        .terminal-body {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+            padding: 2rem;
+            min-height: 500px;
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.1);
+        }
+        
+        /* ASCII Art Header */
+        .ascii-art {
+            color: var(--accent);
+            font-size: 2.0rem;
+            line-height: 1.2;
+            margin-bottom: 2rem;
+            white-space: pre;
+            overflow-x: auto;
+        }
+        
+        /* Typing Animation */
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+        
+        .typing-text {
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 3px solid var(--text-primary);
+            animation: typing 2s steps(40, end), blink 1s step-end infinite;
+            width: fit-content;
+        }
+        
+        /* Command Line Style */
+        .command-line {
+            margin: 1rem 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .prompt {
+            color: var(--text-secondary);
+            margin-right: 0.5rem;
+        }
+        
+        .command {
+            color: var(--info);
+        }
+        
+        .output {
+            margin-left: 2rem;
+            color: var(--text-primary);
+            margin-top: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Section Headers */
+        h1 {
+            font-size: 2rem;
+            color: var(--accent);
+            text-shadow: 0 0 10px rgba(57, 255, 20, 0.5);
+            margin-bottom: 1rem;
+        }
+        
+        h2 {
+            color: var(--text-secondary);
+            font-size: 1.5rem;
+            margin: 2rem 0 1rem 0;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        h2::before {
+            content: "## ";
+            color: var(--text-dim);
+        }
+        
+        h2::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, var(--border) 0%, transparent 100%);
+        }
+        
+        /* Links */
+        a {
+            color: var(--info);
+            text-decoration: none;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        a:hover {
+            color: var(--accent);
+            text-shadow: 0 0 5px rgba(10, 245, 14, 0.5);
+        }
+        
+        a::after {
+            content: "";
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+        
+        a:hover::after {
+            width: 100%;
+        }
+        
+        /* Navigation */
+        nav {
+            margin-bottom: 3rem;
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        nav li::before {
+            content: "[ ";
+            color: var(--text-dim);
+        }
+        
+        nav li::after {
+            content: " ]";
+            color: var(--text-dim);
+        }
+        
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .skill-item {
+            background: var(--bg-primary);
+            border: 1px solid var(--text-dim);
+            padding: 1rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .skill-item:hover {
+            border-color: var(--accent);
+            box-shadow: 0 0 10px rgba(57, 255, 20, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .skill-name {
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .skill-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--text-dim);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--text-dim), var(--accent));
+            transition: width 1s ease;
+            box-shadow: 0 0 10px rgba(57, 255, 20, 0.5);
+        }
+        
+        /* Project Cards */
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .project-card {
+            background: var(--bg-primary);
+            border: 1px solid var(--text-dim);
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .project-card::before {
+            content: ">";
+            position: absolute;
+            top: 1rem;
+            left: 0.5rem;
+            color: var(--accent);
+            animation: blink 1s step-end infinite;
+        }
+        
+        .project-card:hover {
+            border-color: var(--accent);
+            transform: translateX(10px);
+        }
+        
+        .project-title {
+            color: var(--info);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        .tech-tag {
+            background: var(--bg-secondary);
+            color: var(--text-dim);
+            padding: 0.2rem 0.5rem;
+            border: 1px solid var(--text-dim);
+            font-size: 0.8rem;
+        }
+        
+        /* Contact Section */
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .contact-item::before {
+            content: "$";
+            color: var(--warning);
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 4rem;
+            padding: 2rem;
+            border-top: 1px solid var(--text-dim);
+            color: var(--text-dim);
+        }
+        
+        /* Cursor */
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 20px;
+            background: var(--text-primary);
+            animation: blink 1s step-end infinite;
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .ascii-art {
+                font-size: 0.5rem;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            nav ul {
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Terminal Window -->
+        <div class="terminal-header">
+            <div class="terminal-buttons">
+                <div class="terminal-button red"></div>
+                <div class="terminal-button yellow"></div>
+                <div class="terminal-button green"></div>
+            </div>
+            <div class="terminal-title">Taha_Faddaoui.HTML</div>
+        </div>
+        
+        <div class="terminal-body">
+            <!-- ASCII Art Banner -->
+            <pre class="ascii-art">
+▀█▀ ▄▀█ █░█ ▄▀█   █▀▀ ▄▀█ █▀▄ █▀▄ ▄▀█ █▀█ █░█ █
+░█░ █▀█ █▀█ █▀█   █▀░ █▀█ █▄▀ █▄▀ █▀█ █▄█ █▄█ █
+
+            </pre>
+            
+            <!-- Welcome Message -->
+            <div class="command-line">
+                <span class="prompt">$</span>
+                <span class="command typing-text">PuLGa</span>
+            </div>
+            <div class="output">
+                undergraduate in MIS | Fighter @ UFC | Player @ FC Barcelona | Student @ Haliç University
+            </div>
+            
+            <!-- Navigation -->
+            <nav>
+                <div class="command-line">
+                    <span class="prompt">$</span>
+                    <span class="command">Sections</span>
+                </div>
+                <ul class="output">
+                    <li><a href="#about">about.me</a></li>
+                    <li><a href="#skills">skills</a></li>
+                    <li><a href="#publications">publications</a></li>
+                    <li><a href="#education">education.level</a></li>
+                    <li><a href="#certifications">certs.txt</a></li>
+                    <li><a href="#contact">contact.me</a></li>
+                </ul>
+            </nav>
+            
+            <!-- About Section -->
+            <section id="about">
+                <h2>About</h2>
+                <div class="command-line">
+                    <span class="prompt">$</span>
+                    <span class="command">About me</span>
+                </div>
+                <div class="output">
+                    <p>Hi there, My name is Taha Faddaoui but you can call me PuLGa. I am a 22 year old Moroccan University student in Itsanbul turkiye. </p>
+                    <br>
+                    <p>In this section you will get to know me a little bit better, for example My favourite football team is FC Barcelona. Also I am currently in university studying MIS.</p>
+                    <br>
+                    <p>For this last line I honestly don't know what to write so here's my attempt of just filling it with random words.</p>
+                    <br>
+                </div>
+            </section>
+            
+            <!-- Skills Section -->
+            <section id="skills">
+                <h2>Skills</h2>
+                <div class="command-line">
+                    <span class="prompt">$</span>
+                    <span class="command">Here you can see my skills and Attributes</span>
+                </div>
+                <div class="output">
+                    <div class="skills-grid">
+                        <div class="skill-item">
+                            <div class="skill-name">EA FC capabilities</div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 88%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">Looks</div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 69%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">Lying</div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 5%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">Loving Barcelona</div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 100%;"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">Music Producer</div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 45%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Publications Section -->
+            <section id="publications">
+                <h2>Publications</h2>
+                <div class="command-line">
+                    <span class="prompt">$</span>
+                    <span class="command">Here you can see my publications tab</span>
+                </div>
+                <div class="output">
+                    <div class="projects">
+                        <div class="project-card">
+                            <h3 class="project-title">The legends of FC Barcelona</h3>
+                            <p>Below you will see some of the best performing players in the history of FC Barcelona. MES QUE UN CLUB.</p>
+                            <div class="project-tech">
+                                <span class="tech-tag">Leo MESSI</span>
+                                <span class="tech-tag">Johan Cruyff</span>
+                                <span class="tech-tag">Pep Guardiola</span>
+                                <span class="tech-tag">Xavi</span>
+                                <span class="tech-tag">Iniesta</span>
+                                <span class="tech-tag">Busquets</span>
+                            </div>
+                        </div>
+                        <div class="project-card">
+                            <h3 class="project-title">The legends of Morocco</h3>
+                            <p>Below you will see some of the best performing players in the history of Morocco.</p>
+                            <div class="project-tech">
+                                <span class="tech-tag">Achraf Hakimi</span>
+                                <span class="tech-tag">Hakim Ziyech</span>
+                                <span class="tech-tag">Yassine Bounou</span>
+                                <span class="tech-tag">Medhi Benatia</span>
+                            </div>
+                        </div>
+                        <div class="project-card">
+                            <h3 class="project-title">Future superstars to watch out for in the football world.</h3>
+                            <p>Below you will see some young aspiring players who in my opinion will go on to do some amazing things in their respective careers hopefully.</p>
+                            <div class="project-tech">
+                                <span class="tech-tag">Hamza Igamane</span>
+                                <span class="tech-tag">Chemsedine Talbi</span>
+                                <span class="tech-tag">Maamma</span>
+                                <span class="tech-tag">Adam Aznou</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Education Section -->
+            <section id="education">
+                <h2>Education</h2>
+                <div class="command-line">
+                    <span class="prompt">$</span>
+                    <span class="command">Education levels</span>
+                </div>
+                <div class="output">
+                    <div class="projects">
+                        <div class="project-card">
+                            <h3 class="project-title">High school Graduate</h3>
+                            <p style="color: var(--text-secondary);">Academie Maurice Bucaille | 2017 - 2020</p>
+                        </div>
+                        <div class="project-card">
+                            <h3 class="project-title">Undergraduate MIS</h3>
+                            <p style="color: var(--text-secondary);">Halic University | 2021 - 2025</p>
+                            <p>Salut ca va, j'espere que tout va bien avec toi si tu as decidé a utiliser google traduction pour cette phrase.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Certifications Section -->
+            <section id="certifications">
+                <h2>Certifications & Awards</h2>
+                <div class="command-line">
+                    <span class="prompt">$</span>
+                    <span class="command">Certifications</span>
+                </div>
+                <div class="output">
+                    <div style="margin-left: 2rem;">
+                        <p style="color: var(--info);">→ Making FC Barcelona great Again</p>
+                        <p style="color: var(--info);">→ Morocco to win the World cup in the near future</p>
+                        <p style="color: var(--info);">→ Lionel Messi is the GOAT of football</p>
+                        <p style="color: var(--info);">→ I am really enjoying this course and the teacher is doing a good job</p>
+                        <p style="color: var(--info);">→ My dream car is the chevrolet Camaro in yellow with a black stripe</p>
+                        <p style="color: var(--warning);">★ Je crois que je dois écrire quelque chose dans une langue differente</p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Contact Section -->
+            <section id="contact">
+                <h2>Contact</h2>
+                <div class="command-line">
+                    <span class="prompt">$</span>
+                    <span class="command">You can find me here</span>
+                </div>
+                <div class="output">
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <a href="https://www.instagram.com/taha_faddaoui/" target="_blank">Instagram</a>
+                        </div>
+                        <div class="contact-item">
+                            <a href="https://www.youtube.com/@tahafad" target="_blank">Youtube channel</a>
+                        </div>
+                        <div class="contact-item">
+                            <a href="https://github.com/tahafaddaoui" target="_blank">github.com/tahafaddaoui</a>
+                        </div>
+                        <div class="contact-item">
+                            <a href="https://mail.google.com/mail/u/0/?tab=rm&ogbl#inbox" target="_blank">Gmail</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Footer -->
+            <footer>
+                <div class="command-line">
+                    <span class="prompt">$</span>
+                    <span class="command">Thank you Come again</span>
+                </div>
+                <p>© 2025 Taha Faddaoui | Built with &lt;3 and lots of Hope</p>
+                <p>Last login: <span id="current-date"></span></p>
+                <span class="cursor"></span>
+            </footer>
+        </div>
+    </div>
+    
+    <script>
+        // Set current date
+        document.getElementById('current-date').textContent = new Date().toLocaleString();
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+        
+        // Animate skill bars on scroll
+        const observerOptions = {
+            threshold: 0.5,
+            rootMargin: '0px'
+        };
+        
+        const skillObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const skillBars = entry.target.querySelectorAll('.skill-progress');
+                    skillBars.forEach(bar => {
+                        const width = bar.style.width;
+                        bar.style.width = '0';
+                        setTimeout(() => {
+                            bar.style.width = width;
+                        }, 100);
+                    });
+                }
+            });
+        }, observerOptions);
+        
+        const skillsSection = document.querySelector('#skills');
+        if (skillsSection) {
+            skillObserver.observe(skillsSection);
+        }
+        
+        // Terminal typing effect for dynamic content
+        function typeWriter(element, text, speed = 50) {
+            let i = 0;
+            element.textContent = '';
+            
+            function type() {
+                if (i < text.length) {
+                    element.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            
+            type();
+        }
+        
+        // Add glitch effect on hover for the title
+        const title = document.querySelector('.ascii-art');
+        if (title) {
+            title.addEventListener('mouseenter', () => {
+                title.style.animation = 'glitch 0.3s infinite';
+            });
+            
+            title.addEventListener('mouseleave', () => {
+                title.style.animation = 'none';
+            });
+        }
+        
+        // Add glitch animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes glitch {
+                0% { text-shadow: 0.05em 0 0 #00fffc, -0.05em -0.025em 0 #fc00ff, 0.025em 0.05em 0 #fffc00; }
+                15% { text-shadow: 0.05em 0 0 #00fffc, -0.05em -0.025em 0 #fc00ff, 0.025em 0.05em 0 #fffc00; }
+                16% { text-shadow: -0.05em -0.025em 0 #00fffc, 0.025em 0.025em 0 #fc00ff, -0.05em -0.05em 0 #fffc00; }
+                49% { text-shadow: -0.05em -0.025em 0 #00fffc, 0.025em 0.025em 0 #fc00ff, -0.05em -0.05em 0 #fffc00; }
+                50% { text-shadow: 0.025em 0.05em 0 #00fffc, 0.05em 0 0 #fc00ff, 0 -0.05em 0 #fffc00; }
+                99% { text-shadow: 0.025em 0.05em 0 #00fffc, 0.05em 0 0 #fc00ff, 0 -0.05em 0 #fffc00; }
+                100% { text-shadow: -0.025em 0 0 #00fffc, -0.025em -0.025em 0 #fc00ff, -0.025em -0.05em 0 #fffc00; }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
+
