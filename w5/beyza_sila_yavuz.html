@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beyza Sıla Yavuz | MIS Öğrencisi</title>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=JetBrains+Mono:wght@400;700&family=Fira+Code:wght@400;600&family=Source+Code+Pro:wght@400;600&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg-primary: #0a0e0a;
+            --bg-secondary: #1a1f1a;
+            --text-primary: #00ff41;
+            --text-secondary: #00cc33;
+            --text-dim: #008f11;
+            --accent: #39ff14;
+            --error: #ff0040;
+            --warning: #ffaa00;
+            --info: #00ffff;
+            --border: #00ff41;
+        }
+
+        body {
+            font-family: 'Courier Prime', 'JetBrains Mono', 'Fira Code', monospace;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(transparent 50%, rgba(0, 255, 65, 0.03) 50%);
+            background-size: 100% 4px;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: radial-gradient(ellipse at center, transparent 0%, rgba(0, 0, 0, 0.4) 100%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .terminal-header {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px 8px 0 0;
+            padding: 0.5rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .terminal-buttons { display: flex; gap: 0.5rem; }
+        .terminal-button { width: 12px; height: 12px; border-radius: 50%; }
+        .terminal-button.red { background: #ff5f56; }
+        .terminal-button.yellow { background: #ffbd2e; }
+        .terminal-button.green { background: #27c93f; }
+        .terminal-title { flex: 1; text-align: center; color: var(--text-dim); font-size: 0.9rem; }
+
+        .terminal-body {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+            padding: 2rem;
+            min-height: 500px;
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.1);
+        }
+
+        .ascii-art {
+            color: var(--accent);
+            font-size: 0.7rem;
+            line-height: 1.2;
+            margin-bottom: 2rem;
+            white-space: pre;
+            overflow-x: auto;
+        }
+
+        @keyframes typing { from { width: 0; } to { width: 100%; } }
+        @keyframes blink { 50% { opacity: 0; } }
+        .typing-text {
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 3px solid var(--text-primary);
+            animation: typing 2s steps(40, end), blink 1s step-end infinite;
+            width: fit-content;
+        }
+
+        .command-line { margin: 1rem 0; display: flex; align-items: center; }
+        .prompt { color: var(--text-secondary); margin-right: 0.5rem; }
+        .command { color: var(--info); }
+        .output { margin-left: 2rem; color: var(--text-primary); margin-top: 0.5rem; margin-bottom: 1.5rem; }
+
+        h1 { font-size: 2rem; color: var(--accent); text-shadow: 0 0 10px rgba(57, 255, 20, 0.5); margin-bottom: 1rem; }
+        h2 { color: var(--text-secondary); font-size: 1.5rem; margin: 2rem 0 1rem 0; position: relative; padding-bottom: 0.5rem; }
+        h2::before { content: "## "; color: var(--text-dim); }
+        h2::after { content: ""; position: absolute; bottom: 0; left: 0; width: 100%; height: 1px; background: linear-gradient(90deg, var(--border) 0%, transparent 100%); }
+
+        a { color: var(--info); text-decoration: none; position: relative; transition: all 0.3s ease; }
+        a:hover { color: var(--accent); text-shadow: 0 0 5px rgba(0, 255, 255, 0.5); }
+        a::after { content: ""; position: absolute; bottom: -2px; left: 0; width: 0; height: 1px; background: var(--accent); transition: width 0.3s ease; }
+        a:hover::after { width: 100%; }
+
+        nav { margin-bottom: 3rem; }
+        nav ul { list-style: none; display: flex; gap: 2rem; flex-wrap: wrap; }
+        nav li::before { content: "[ "; color: var(--text-dim); }
+        nav li::after { content: " ]"; color: var(--text-dim); }
+
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+        .skill-item { background: var(--bg-primary); border: 1px solid var(--text-dim); padding: 1rem; transition: all 0.3s ease; }
+        .skill-item:hover { border-color: var(--accent); box-shadow: 0 0 10px rgba(57, 255, 20, 0.3); transform: translateY(-2px); }
+        .skill-name { color: var(--text-secondary); margin-bottom: 0.5rem; }
+        .skill-bar { width: 100%; height: 8px; background: var(--bg-secondary); border: 1px solid var(--text-dim); overflow: hidden; }
+        .skill-progress { height: 100%; background: linear-gradient(90deg, var(--text-dim), var(--accent)); transition: width 1s ease; box-shadow: 0 0 10px rgba(57, 255, 20, 0.5); }
+
+        .projects { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin: 2rem 0; }
+        .project-card { background: var(--bg-primary); border: 1px solid var(--text-dim); padding: 1.5rem; transition: all 0.3s ease; position: relative; }
+        .project-card::before { content: ">"; position: absolute; top: 1rem; left: 0.5rem; color: var(--accent); animation: blink 1s step-end infinite; }
+        .project-card:hover { border-color: var(--accent); transform: translateX(10px); }
+
+        footer { text-align: center; margin-top: 4rem; padding: 2rem; border-top: 1px solid var(--text-dim); color: var(--text-dim); }
+
+        @media (max-width: 768px) { .container { padding: 1rem; } .ascii-art { font-size: 0.5rem; } h1 { font-size: 1.5rem; } nav ul { gap: 1rem; } }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="terminal-header">
+            <div class="terminal-buttons">
+                <div class="terminal-button red"></div>
+                <div class="terminal-button yellow"></div>
+                <div class="terminal-button green"></div>
+            </div>
+            <div class="terminal-title">beyzasilayavuz@halic-university:~/portfolio</div>
+        </div>
+
+        <div class="terminal-body">
+            <pre class="ascii-art">
+██████╗ ███████╗██╗   ██╗███████╗██╗   ██╗ █████╗     ██╗   ██╗ █████╗ ██╗   ██╗██╗   ██╗██╗   ██╗
+██╔══██╗██╔════╝██║   ██║██╔════╝╚██╗ ██╔╝██╔══██╗    ██║   ██║██╔══██╗██║   ██║╚██╗ ██╔╝╚██╗ ██╔╝
+██████╔╝█████╗  ██║   ██║█████╗   ╚████╔╝ ███████║    ██║   ██║███████║██║   ██║ ╚████╔╝  ╚████╔╝ 
+██╔═══╝ ██╔══╝  ╚██╗ ██╔╝██╔══╝    ╚██╔╝  ██╔══██║    ╚██╗ ██╔╝██╔══██║██║   ██║  ╚██╔╝    ╚██╔╝  
+██║     ███████╗ ╚████╔╝ ███████╗   ██║   ██║  ██║     ╚████╔╝ ██║  ██║╚██████╔╝   ██║      ██║   
+╚═╝     ╚══════╝  ╚═══╝  ╚══════╝   ╚═╝   ╚═╝  ╚═╝      ╚═══╝  ╚═╝  ╚═╝ ╚═════╝    ╚═╝      ╚═╝   
+            </pre>
+
+            <div class="command-line">
+                <span class="prompt">$</span>
+                <span class="command typing-text">whoami</span>
+            </div>
+            <div class="output">
+                Beyza Sıla Yavuz | MIS Öğrencisi | Web & Veri Teknolojileri Meraklısı
+            </div>
+
+            <section id="about">
+                <h2>Hakkımda</h2>
+                <div class="output">
+                    <p>Merhaba! Ben <strong>Beyza Sıla Yavuz</strong>, Haliç Üniversitesi Yönetim Bilişim Sistemleri öğrencisiyim.  
+                    Teknoloji, veri ve tasarımın birleştiği alanlara ilgim var.  
+                    Web geliştirme ve veritabanı yönetimi konularında kendimi geliştiriyorum.</p>
+                </div>
+            </section>
+
+            <section id="skills">
+                <h2>Beceriler</h2>
+                <div class="output">
+                    <ul>
+                        <li>HTML, CSS ve JavaScript</li>
+                        <li>C# ve SQL (SQLite / Oracle)</li>
+                        <li>Veritabanı Tasarımı & ERD</li>
+                        <li>Takım Çalışması ve Problem Çözme</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="contact">
+                <h2>İletişim</h2>
+                <div class="output">
+                    <p>📧 <a href="mailto:beyzasilayavuz@gmail.com">beyzasilayavuz@gmail.com</a></p>
+                    <p>💼 <a href="https://www.linkedin.com/in/beyzasilayavuz" target="_blank">linkedin.com/in/beyzasilayavuz</a></p>
+                    <p>💻 <a href="https://github.com/beyzasyavuz" target="_blank">github.com/beyzasilayavuz</a></p>
+                </div>
+            </section>
+
+            <footer>
+                <p>© 2025 Beyza Sıla Yavuz | MIS2003 Homework 5</p>
+                <p>Last login: <span id="current-date"></span></p>
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('current-date').textContent = new Date().toLocaleString('tr-TR');
+    </script>
+</body>
+</html>
