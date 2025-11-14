@@ -15,16 +15,16 @@
         }
         
         :root {
-            --bg-primary: #0a0e0a;
-            --bg-secondary: #1a1f1a;
-            --text-primary: #00ff41;
-            --text-secondary: #00cc33;
-            --text-dim: #008f11;
+            --bg-primary: #3f5fc0;
+            --bg-secondary: #1e243d;
+            --text-primary: #8091bc;
+            --text-secondary: #ffffff;
+            --text-dim: #b9b4df;
             --accent: #39ff14;
             --error: #ff0040;
             --warning: #ffaa00;
-            --info: #00ffff;
-            --border: #00ff41;
+            --info: #ffffff;
+            --border: #bfb7db;
         }
         
         body {
@@ -46,7 +46,7 @@
             height: 100%;
             background: linear-gradient(
                 transparent 50%,
-                rgba(0, 255, 65, 0.03) 50%
+                rgba(0, 51, 255, 0.03) 50%
             );
             background-size: 100% 4px;
             pointer-events: none;
@@ -119,12 +119,12 @@
             border-radius: 0 0 8px 8px;
             padding: 2rem;
             min-height: 500px;
-            box-shadow: 0 0 20px rgba(0, 255, 65, 0.1);
+            box-shadow: 0 0 20px rgba(55, 0, 255, 0.1);
         }
         
         /* ASCII Art Header */
         .ascii-art {
-            color: var(--accent);
+            color: var(--text-secondary);
             font-size: 0.7rem;
             line-height: 1.2;
             margin-bottom: 2rem;
@@ -177,7 +177,7 @@
         h1 {
             font-size: 2rem;
             color: var(--accent);
-            text-shadow: 0 0 10px rgba(57, 255, 20, 0.5);
+            text-shadow: 0 0 10px rgba(91, 68, 225, 0.5);
             margin-bottom: 1rem;
         }
         
@@ -272,7 +272,7 @@
         
         .skill-item:hover {
             border-color: var(--accent);
-            box-shadow: 0 0 10px rgba(57, 255, 20, 0.3);
+            box-shadow: 0 0 10px rgba(83, 123, 243, 0.3);
             transform: translateY(-2px);
         }
         
@@ -294,7 +294,7 @@
             height: 100%;
             background: linear-gradient(90deg, var(--text-dim), var(--accent));
             transition: width 1s ease;
-            box-shadow: 0 0 10px rgba(57, 255, 20, 0.5);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
         }
         
         /* Project Cards */
@@ -414,7 +414,7 @@
                 <div class="terminal-button yellow"></div>
                 <div class="terminal-button green"></div>
             </div>
-            <div class="terminal-title">maliozer@ai-workstation:~/portfolio</div>
+            <div class="terminal-title">büşrayaman-workstation:~/portfolio</div>
         </div>
         
         <div class="terminal-body">
@@ -428,6 +428,8 @@
 ╚═════╝  ╚═════╝ ╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝       ╚═╝   ╚═╝  ╚═╝╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝
                                                                                            
             </pre>
+
+            <img src="Ekran_goruntusu_2025-05-29_151214.png" alt="Büşra Yaman'ın Fotoğrafı" width="175" height="200">
             
             <!-- Welcome Message -->
             <div class="command-line">
@@ -462,13 +464,12 @@
                     <span class="command">cat about.md</span>
                 </div>
                 <div class="output">
-                    <p>Hello, World! I'm Büşra Yaman, Director of SafeNLP.org, passionate about web development and artificial intelligence. I love learning new technologies and building creative projects.</p>
+                    <p>Hello, World! I'm Büşra Yaman, passionate about web development. I love learning new technologies and building creative projects.</p>
                     <br>
                     <p>I aim to gain practical experience through projects and continuously grow as a developer.</p>
                     <br>
                     <p>I enjoy learning new technologies and improving my skills in Java, C#, and web development.</p>
                     <br>
-                    <p>Check out my blog at <a href="https://safenlp.substack.com/" target="_blank">safenlp.substack.com</a> where I write about NLP and AI developments.</p>
                 </div>
             </section>
             
@@ -516,47 +517,27 @@
             </section>
             
             <!-- Publications Section -->
-            <section id="publications">
-                <h2>Publications</h2>
-                <div class="command-line">
-                    <span class="prompt">$</span>
-                    <span class="command">grep -r "*.pdf" ./publications/ | head -3</span>
+<section id="publications">
+    <h2>Projects</h2>
+    <div class="command-line">
+        <span class="prompt">$</span>
+        <span class="command">ls ./projects/</span>
+    </div>
+    <div class="output">
+        <div class="projects">
+            <div class="project-card">
+                <h3 class="project-title">Simple Bank System (Java)</h3>
+                <p>A Java console application that allows users to deposit and withdraw money easily. Demonstrates understanding of basic Java concepts such as classes, objects, methods, and user input handling.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">Java</span>
+                    <span class="tech-tag">OOP</span>
+                    <span class="tech-tag">Console App</span>
+                    <span class="tech-tag">Banking Simulation</span>
                 </div>
-                <div class="output">
-                    <div class="projects">
-                        <div class="project-card">
-                            <h3 class="project-title">Performance Analysis of Text Chunking Methods for LLM-Based Document Summarization</h3>
-                            <p>Published at UBMK Conference. Research on optimizing text chunking strategies for improved LLM-based document summarization performance.</p>
-                            <div class="project-tech">
-                                <span class="tech-tag">LLMs</span>
-                                <span class="tech-tag">Text Chunking</span>
-                                <span class="tech-tag">Summarization</span>
-                                <span class="tech-tag">UBMK</span>
-                            </div>
-                        </div>
-                        <div class="project-card">
-                            <h3 class="project-title">Sentiment Analysis of Twitter Reflections of Distance Education in the COVID-19 Pandemic Process</h3>
-                            <p>Research analyzing public sentiment towards distance education during the COVID-19 pandemic using Twitter data and NLP techniques.</p>
-                            <div class="project-tech">
-                                <span class="tech-tag">Sentiment Analysis</span>
-                                <span class="tech-tag">Twitter API</span>
-                                <span class="tech-tag">NLP</span>
-                                <span class="tech-tag">COVID-19</span>
-                            </div>
-                        </div>
-                        <div class="project-card">
-                            <h3 class="project-title">An Investigation of the Usage of Dynamic Time Warping in String Similarity Estimation</h3>
-                            <p>Comprehensive investigation into DTW algorithms and their applications in string similarity estimation and pattern matching.</p>
-                            <div class="project-tech">
-                                <span class="tech-tag">DTW</span>
-                                <span class="tech-tag">String Matching</span>
-                                <span class="tech-tag">Algorithm Analysis</span>
-                                <span class="tech-tag">Research</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            </div>
+        </div>
+    </div>
+</section>
             
             <!-- Education Section -->
             <section id="education">
@@ -611,8 +592,6 @@
                         <div class="contact-item">
                             <a href="https://github.com/busryaman" target="_blank">github.com/busryaman</a>
                         </div>
-
-                        </div>
                     </div>
                 </div>
             </section>
@@ -623,7 +602,7 @@
                     <span class="prompt">$</span>
                     <span class="command">exit</span>
                 </div>
-                <p>© 2024 Mehmet Ali Özer | Built with &lt;3 and lots of coffee</p>
+                <p>© 2024 Büşra Yaman | Built with patience and creativity</p>
                 <p>Last login: <span id="current-date"></span></p>
                 <span class="cursor"></span>
             </footer>
